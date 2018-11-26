@@ -1,7 +1,7 @@
 package PurchaseSystem.service.implement;
 
 import PurchaseSystem.dao.employeeDao;
-import PurchaseSystem.model.Employee;
+import PurchaseSystem.model.Role.Employee;
 import PurchaseSystem.service.IEmployeeService;
 import org.springframework.stereotype.Service;
 

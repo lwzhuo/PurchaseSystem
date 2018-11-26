@@ -1,6 +1,6 @@
 package PurchaseSystem.controller;
 
-import PurchaseSystem.model.Employee;
+import PurchaseSystem.model.Role.Employee;
 import PurchaseSystem.service.IEmployeeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;

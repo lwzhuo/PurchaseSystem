@@ -1,4 +1,4 @@
-package PurchaseSystem.model;
+package PurchaseSystem.model.Role;
 
 public class Employee {
     private long id;
