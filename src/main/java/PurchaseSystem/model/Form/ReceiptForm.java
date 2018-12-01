@@ -3,23 +3,23 @@ package PurchaseSystem.model.Form;
 import java.util.Date;
 
 public class ReceiptForm extends form {
-    private long orderId;
-    private long auditorId;
+    private Long orderId;
+    private Long auditorId;
     private Date receiveDate;
 
-    public long getOrderId() {
+    public Long getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(long orderId) {
+    public void setOrderId(Long orderId) {
         this.orderId = orderId;
     }
 
-    public long getAuditorId() {
+    public Long getAuditorId() {
         return auditorId;
     }
 
-    public void setAuditorId(long auditorId) {
+    public void setAuditorId(Long auditorId) {
         this.auditorId = auditorId;
     }
 

@@ -6,18 +6,18 @@ import java.util.Date;
 import java.util.List;
 
 public abstract class form {
-    private long id;
+    private Long id;
     private String name;
-    private int status;
+    private Integer status;
     private String comment;
     private List<DetailItem> detailList;
     private Date makeDate;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -29,11 +29,11 @@ public abstract class form {
         this.name = name;
     }
 
-    public int getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 

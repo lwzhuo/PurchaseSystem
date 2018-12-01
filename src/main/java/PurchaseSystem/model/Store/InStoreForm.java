@@ -3,22 +3,22 @@ package PurchaseSystem.model.Store;
 import PurchaseSystem.model.Form.form;
 
 public class InStoreForm extends form {
-    private long auditorId;
-    private long receiptId;
+    private Long auditorId;
+    private Long receiptId;
 
-    public long getAuditorId() {
+    public Long getAuditorId() {
         return auditorId;
     }
 
-    public void setAuditorId(long auditorId) {
+    public void setAuditorId(Long auditorId) {
         this.auditorId = auditorId;
     }
 
-    public long getReceiptId() {
+    public Long getReceiptId() {
         return receiptId;
     }
 
-    public void setReceiptId(long receiptId) {
+    public void setReceiptId(Long receiptId) {
         this.receiptId = receiptId;
     }
 }

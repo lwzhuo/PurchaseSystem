@@ -3,9 +3,9 @@ package PurchaseSystem.model.Store;
 import PurchaseSystem.model.Form.form;
 
 public class OutStoreForm extends form {
-    private long auditorId;
+    private Long auditorId;
 
-    public long getAuditorId() {
+    public Long getAuditorId() {
         return auditorId;
     }
 

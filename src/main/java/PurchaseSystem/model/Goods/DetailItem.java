@@ -1,40 +1,40 @@
 package PurchaseSystem.model.Goods;
 
 public class DetailItem {
-    private long detailItemId;
-    private long formId;
-    private long goodsId;
-    private int goodsNum;
+    private Long detailItemId;
+    private Long formId;
+    private Long goodsId;
+    private Integer goodsNum;
 
-    public long getDetailItemId() {
+    public Long getDetailItemId() {
         return detailItemId;
     }
 
-    public void setDetailItemId(long detailItemId) {
+    public void setDetailItemId(Long detailItemId) {
         this.detailItemId = detailItemId;
     }
 
-    public long getFormId() {
+    public Long getFormId() {
         return formId;
     }
 
-    public void setFormId(long formId) {
+    public void setFormId(Long formId) {
         this.formId = formId;
     }
 
-    public long getGoodsId() {
+    public Long getGoodsId() {
         return goodsId;
     }
 
-    public void setGoodsId(long goodsId) {
+    public void setGoodsId(Long goodsId) {
         this.goodsId = goodsId;
     }
 
-    public int getGoodsNum() {
+    public Integer getGoodsNum() {
         return goodsNum;
     }
 
-    public void setGoodsNum(int goodsNum) {
+    public void setGoodsNum(Integer goodsNum) {
         this.goodsNum = goodsNum;
     }
 }

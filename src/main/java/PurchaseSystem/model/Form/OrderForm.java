@@ -1,32 +1,32 @@
 package PurchaseSystem.model.Form;
 
 public class OrderForm extends form {
-    private long supplierId;
-    private float amount;
-    private long auditorId;
+    private Long supplierId;
+    private Float amount;
+    private Long auditorId;
     private String contractPath;
 
-    public long getSupplierId() {
+    public Long getSupplierId() {
         return supplierId;
     }
 
-    public void setSupplierId(long supplierId) {
+    public void setSupplierId(Long supplierId) {
         this.supplierId = supplierId;
     }
 
-    public float getAmount() {
+    public Float getAmount() {
         return amount;
     }
 
-    public void setAmount(float amount) {
+    public void setAmount(Float amount) {
         this.amount = amount;
     }
 
-    public long getAuditorId() {
+    public Long getAuditorId() {
         return auditorId;
     }
 
-    public void setAuditorId(long auditorId) {
+    public void setAuditorId(Long auditorId) {
         this.auditorId = auditorId;
     }
 

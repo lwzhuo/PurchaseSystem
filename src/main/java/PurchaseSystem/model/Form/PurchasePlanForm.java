@@ -1,13 +1,13 @@
 package PurchaseSystem.model.Form;
 
 public class PurchasePlanForm {
-    private long makerId;
+    private Long makerId;
 
-    public long getMakerId() {
+    public Long getMakerId() {
         return makerId;
     }
 
-    public void setMakerId(long makerId) {
+    public void setMakerId(Long makerId) {
         this.makerId = makerId;
     }
 }

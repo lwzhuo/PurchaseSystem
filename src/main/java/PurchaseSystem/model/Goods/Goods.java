@@ -1,16 +1,16 @@
 package PurchaseSystem.model.Goods;
 
 public class Goods {
-    private long goodsId;
+    private Long goodsId;
     private String goodsName;
-    private double goodsPrice;
-    private long supplierId;
+    private Double goodsPrice;
+    private Long supplierId;
 
-    public long getGoodsId() {
+    public Long getGoodsId() {
         return goodsId;
     }
 
-    public void setGoodsId(long goodsId) {
+    public void setGoodsId(Long goodsId) {
         this.goodsId = goodsId;
     }
 
@@ -22,19 +22,19 @@ public class Goods {
         this.goodsName = goodsName;
     }
 
-    public double getGoodsPrice() {
+    public Double getGoodsPrice() {
         return goodsPrice;
     }
 
-    public void setGoodsPrice(double goodsPrice) {
+    public void setGoodsPrice(Double goodsPrice) {
         this.goodsPrice = goodsPrice;
     }
 
-    public long getSupplierId() {
+    public Long getSupplierId() {
         return supplierId;
     }
 
-    public void setSupplierId(long supplierId) {
+    public void setSupplierId(Long supplierId) {
         this.supplierId = supplierId;
     }
 }

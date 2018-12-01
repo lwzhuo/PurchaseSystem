@@ -1,22 +1,22 @@
 package PurchaseSystem.model.Store;
 
 public class Store {
-    private long goodsId;
-    private int goodsNum;
+    private Long goodsId;
+    private Integer goodsNum;
 
-    public long getGoodsId() {
+    public Long getGoodsId() {
         return goodsId;
     }
 
-    public void setGoodsId(long goodsId) {
+    public void setGoodsId(Long goodsId) {
         this.goodsId = goodsId;
     }
 
-    public int getGoodsNum() {
+    public Integer getGoodsNum() {
         return goodsNum;
     }
 
-    public void setGoodsNum(int goodsNum) {
+    public void setGoodsNum(Integer goodsNum) {
         this.goodsNum = goodsNum;
     }
 }
