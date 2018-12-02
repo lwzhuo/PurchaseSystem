@@ -1,17 +1,17 @@
-package PurchaseSystem.model;
+package PurchaseSystem.model.Role;
 
 public class Employee {
-    private long id;
+    private Long id;
     private String name;
     private String address;
     private String phone;
-    private int apartment;
+    private Integer apartment;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -39,11 +39,11 @@ public class Employee {
         this.phone = phone;
     }
 
-    public int getApartment() {
+    public Integer getApartment() {
         return apartment;
     }
 
-    public void setApartment(int apartment) {
+    public void setApartment(Integer apartment) {
         this.apartment = apartment;
     }
 }

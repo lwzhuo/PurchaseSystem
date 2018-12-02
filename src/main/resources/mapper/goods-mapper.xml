@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="PurchaseSystem.dao.goodsDao">
+    <resultMap id="GoodsResultMap" type="java.util.HashMap">
+        <id column="id" property="goodsId"></id>
+        <result column="goods_name" property="goodsName"></result>
+        <result column="goods_price" property="goodsPrice"></result>
+        <result column="supplier_name" property="supplierName"></result>
+        <association column="supplier_id" property="supplierName"
+                     select="PurchaseSystem.dao.supplierDao.selectSupplierNameById"></association>
+    </resultMap>
+
+    <select id="selectGoodsById" resultMap="GoodsResultMap" parameterType="int">
+        SELECT id,goods_name,goods_price,supplier_name
+        FROM goods,supplier
+        WHERE goods.supplier_id=supplier.supplier_id and id = #{id}
+    </select>
+
+    <select id="selectGoods" resultMap="GoodsResultMap">
+        SELECT id,goods_name,goods_price,supplier_name
+        FROM goods,supplier
+        WHERE goods.supplier_id=supplier.supplier_id
+        LIMIT #{base},#{offset}
+    </select>
+
+    <insert id="insertGoods" useGeneratedKeys="true" keyProperty="goodsId" parameterType="PurchaseSystem.model.Goods.Goods">
+        INSERT INTO goods(goods_name,goods_price,supplier_id)
+        VALUES (#{goodsName},#{goodsPrice},#{supplierId})
+    </insert>
+
+    <update id="updateGoods" useGeneratedKeys="true" keyProperty="goodsId" parameterType="PurchaseSystem.model.Goods.Goods" >
+        UPDATE goods
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="goodsName!=null">goods_name=#{goodsName},</if>
+            <if test="goodsPrice!=null">goods_price=#{goodsPrice},</if>
+            <if test="supplierId!=null">supplier_id=#{supplierId},</if>
+        </trim>
+        WHERE id=#{goodsId}
+    </update>
+
+
+    <delete id="deleteGoods" parameterType="Integer">
+        DELETE FROM goods WHERE id=#{id}
+    </delete>
+</mapper>
