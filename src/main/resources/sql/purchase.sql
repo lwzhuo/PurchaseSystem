@@ -31,9 +31,17 @@ CREATE TABLE goods(
     `goods_name` VARCHAR(20) NOT NULL,
     `goods_price` double NOT NULL,
     `supplier_id` INT NOT NULL,
+    `goods_type_id` INT NOT NULL,
     PRIMARY KEY(`id`),
-    FOREIGN KEY (supplier_id) REFERENCES supplier(supplier_id)
+    FOREIGN KEY (supplier_id) REFERENCES supplier(supplier_id),
+    FOREIGN KEY (goods_type_id) REFERENCES goods_type(id)
     )ENGINE=InnoDB DEFAULT CHARSET=utf8;
+-- 商品类别表
+CREATE TABLE goods_type(
+  `id` INT NOT NULL auto_increment,
+  `type_name` VARCHAR(20) NOT NULL,
+  PRIMARY KEY(`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 -- 需求计划单表
 CREATE TABLE needplan_form(
 	`id` BIGINT NOT NULL auto_increment,
