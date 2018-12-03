@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="PurchaseSystem.dao.Form.needPlanFormDetailDao">
+    <resultMap id="NPFDetailMap" type="java.util.HashMap">
+        <id column="npfd_id" property="detailItemId"></id>
+        <result column="form_id" property="formId"></result>
+        <result column="npfd_goodsid" property="goodsId"></result>
+        <result column="goods_name" property="goodsName"></result>
+        <result column="goods_num" property="goodsNum"></result>
+    </resultMap>
+    <insert id="insertDetail" keyProperty="" parameterType="java.util.List">
+      INSERT INTO needform_detail (form_id,goods_id,goods_num)
+      VALUES 
+      <foreach collection="detailList" item="item" index="index" separator=",">
+          (#{formid},#{item.goodsId},#{item.goodsNum})
+      </foreach>
+    </insert>
+    <delete id="deleteDetail" parameterType="long">
+        DELETE FROM needform_detail WHERE form_id=#{formid}
+    </delete>
+    <update id="updateDetail" parameterType="java.util.List">
+        UPDATE needform_detail
+        <trim prefix="SET" suffixOverrides=",">
+            goods_id=CASE id
+            <foreach collection="detailList" item="detail">
+                WHEN #{detail.detailItemId} THEN #{detail.goodsId}
+            </foreach>
+            END,
+            goods_num=CASE id
+            <foreach collection="detailList" item="detail">
+                WHEN #{detail.detailItemId} THEN #{detail.goodsNum}
+            </foreach>
+            END
+        </trim>
+        WHERE id in
+            <foreach collection="detailList" item="detail" open="(" separator="," close=")">
+                #{detail.detailItemId}
+            </foreach>
+        -- 更新操作
+--         update needform_detail set
+--         goods_id=case id
+--         when 9 then 10
+--         when 10 then 9
+--         end,
+--         goods_num=case id
+--         when 9 then 10
+--         when 10 then 10
+--         end
+--         where id in (9,10)
+    </update>
+    <select id="selectDetailByFormId" parameterType="long" resultMap="NPFDetailMap">
+        SELECT needform_detail.id as npfd_id,form_id,needform_detail.goods_id as npfd_goodsid,goods_num,goods_name
+        FROM needform_detail,goods
+        WHERE needform_detail.goods_id=goods.id AND needform_detail.form_id=#{id}
+    </select>
+</mapper>
