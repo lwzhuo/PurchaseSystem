@@ -3,30 +3,34 @@
 
 <mapper namespace="PurchaseSystem.dao.goodsDao">
     <resultMap id="GoodsResultMap" type="java.util.HashMap">
-        <id column="id" property="goodsId"></id>
+        <id column="goods_id" property="goodsId"></id>
         <result column="goods_name" property="goodsName"></result>
         <result column="goods_price" property="goodsPrice"></result>
         <result column="supplier_name" property="supplierName"></result>
+        <result column="goods_type_id" property="typeId"></result>
+        <result column="type_name" property="typeName"></result>
         <association column="supplier_id" property="supplierName"
                      select="PurchaseSystem.dao.supplierDao.selectSupplierNameById"></association>
     </resultMap>
 
     <select id="selectGoodsById" resultMap="GoodsResultMap" parameterType="int">
-        SELECT id,goods_name,goods_price,supplier_name
-        FROM goods,supplier
-        WHERE goods.supplier_id=supplier.supplier_id and id = #{id}
+        SELECT goods.id as goods_id,goods_name,goods_price,supplier_name,goods_type.id as goods_type_id,type_name
+        FROM goods,supplier,goods_type
+        WHERE goods.supplier_id=supplier.supplier_id and
+        goods.goods_type_id = goods_type.id and goods.id = #{id}
     </select>
 
     <select id="selectGoods" resultMap="GoodsResultMap">
-        SELECT id,goods_name,goods_price,supplier_name
-        FROM goods,supplier
-        WHERE goods.supplier_id=supplier.supplier_id
+        SELECT goods.id as goods_id,goods_name,goods_price,supplier_name,goods_type.id as goods_type_id,type_name
+        FROM goods,supplier,goods_type
+        WHERE goods.supplier_id=supplier.supplier_id and
+        goods.goods_type_id = goods_type.id
         LIMIT #{base},#{offset}
     </select>
 
     <insert id="insertGoods" useGeneratedKeys="true" keyProperty="goodsId" parameterType="PurchaseSystem.model.Goods.Goods">
-        INSERT INTO goods(goods_name,goods_price,supplier_id)
-        VALUES (#{goodsName},#{goodsPrice},#{supplierId})
+        INSERT INTO goods(goods_name,goods_price,supplier_id,goods_type_id)
+        VALUES (#{goodsName},#{goodsPrice},#{supplierId},#{typeId})
     </insert>
 
     <update id="updateGoods" useGeneratedKeys="true" keyProperty="goodsId" parameterType="PurchaseSystem.model.Goods.Goods" >
@@ -35,12 +39,16 @@
             <if test="goodsName!=null">goods_name=#{goodsName},</if>
             <if test="goodsPrice!=null">goods_price=#{goodsPrice},</if>
             <if test="supplierId!=null">supplier_id=#{supplierId},</if>
+            <if test="typeId!=null">goods_type_id=#{typeId},</if>
         </trim>
         WHERE id=#{goodsId}
     </update>
 
-
     <delete id="deleteGoods" parameterType="Integer">
         DELETE FROM goods WHERE id=#{id}
     </delete>
+
+    <select id="getTypeList" resultType="java.util.HashMap">
+        SELECT * FROM goods_type
+    </select>
 </mapper>

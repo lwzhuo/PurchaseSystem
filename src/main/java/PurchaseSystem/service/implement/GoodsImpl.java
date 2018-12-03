@@ -66,4 +66,8 @@ public class GoodsImpl implements IGoodsService {
         hashMap.put("goodList",goodsList);
         return hashMap;
     }
+
+    public List<HashMap> getTypeList(){
+        return this.goodsDao.getTypeList();
+    }
 }

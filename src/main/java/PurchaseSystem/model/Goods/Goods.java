@@ -5,6 +5,7 @@ public class Goods {
     private String goodsName;
     private Double goodsPrice;
     private Long supplierId;
+    private Integer typeId;
 
     public Long getGoodsId() {
         return goodsId;
@@ -36,5 +37,12 @@ public class Goods {
 
     public void setSupplierId(Long supplierId) {
         this.supplierId = supplierId;
+    }
+    public Integer getTypeId() {
+        return typeId;
+    }
+
+    public void setTypeId(Integer typeId) {
+        this.typeId = typeId;
     }
 }
