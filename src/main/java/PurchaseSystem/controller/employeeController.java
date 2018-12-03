@@ -16,8 +16,7 @@ public class employeeController {
     private IEmployeeService employeeService;
 
     @RequestMapping(value = "/{id}",method = RequestMethod.GET,produces = "application/json")
-    @ResponseBody
-    public Employee selectEmployee(@PathVariable("id") long id){
+    public @ResponseBody Employee selectEmployee(@PathVariable("id") long id){
         Employee employee = employeeService.selectEmployee(id);
         return employee;
     }
