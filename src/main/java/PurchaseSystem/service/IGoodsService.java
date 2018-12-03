@@ -4,6 +4,7 @@ import PurchaseSystem.model.Goods.Goods;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
 public interface IGoodsService {
     public int insertGoods(Goods goods);
@@ -13,4 +14,5 @@ public interface IGoodsService {
     public int updateGoodsBatch(Iterator it);
     public HashMap selectGoodsById(int id);
     public HashMap selectGoods(int base, int offset);
+    public List<HashMap> getTypeList();
 }

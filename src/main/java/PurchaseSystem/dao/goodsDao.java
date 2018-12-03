@@ -12,4 +12,5 @@ public interface goodsDao {
     public int insertGoods(Goods goods);
     public int updateGoods(Goods goods);
     public int deleteGoods(int id);
+    public List<HashMap> getTypeList();
 }

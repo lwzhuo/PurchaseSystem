@@ -17,7 +17,7 @@ public class goodsController {
     private IGoodsService goodsService;
 
     //insert
-    @PostMapping(value = "/insertgoods",consumes = "application/json",produces = "application/json")
+    @PostMapping(value = "/insert",consumes = "application/json",produces = "application/json")
     public String addGoods(@RequestBody Goods goods){
         int num = goodsService.insertGoods(goods);
         if(num==1) return returnJson.returnOK();
@@ -32,7 +32,7 @@ public class goodsController {
         else return returnJson.returnError();
     }
 
-    @PostMapping(value = "/deletegoodsbatch",consumes = "application/json",produces = "application/json")
+    @PostMapping(value = "/deletebatch",consumes = "application/json",produces = "application/json")
     public String deleteGoodsBatch(@RequestBody HashMap hashMap){
         List deleteList = (List)hashMap.get("deleteList");
         Iterator iterator = deleteList.iterator();
@@ -43,7 +43,7 @@ public class goodsController {
     }
 
     //update
-    @PostMapping(value = "/updategoods",consumes = "application/json",produces = "application/json")
+    @PostMapping(value = "/update",consumes = "application/json",produces = "application/json")
     public String updateGoods(@RequestBody HashMap<String,Goods> hashMap){
         Goods goods = hashMap.get("goods");
         hashMap.remove("goods");
@@ -52,7 +52,7 @@ public class goodsController {
         else return returnJson.returnError();
     }
 
-    @PostMapping(value = "/updategoodsbatch",consumes = "application/json",produces = "application/json")
+    @PostMapping(value = "/updatebatch",consumes = "application/json",produces = "application/json")
     public String updateGoodsBatch(@RequestBody HashMap<String,List<Goods>> hashMap){
         List<Goods> goodsList = hashMap.get("goodsList");
         Iterator it = goodsList.iterator();
@@ -69,5 +69,14 @@ public class goodsController {
     @GetMapping(value = "/{base:[0-9]+}-{offset:[0-9]+}",produces = "application/json")
     public @ResponseBody HashMap getGoodsList(@PathVariable("base")int base,@PathVariable("offset")int offset){
         return goodsService.selectGoods(base,offset);
+    }
+
+    @GetMapping(value = "/typelist",produces = "application/json")
+    public @ResponseBody HashMap getTypeList(){
+        HashMap hashMap = new HashMap();
+        List list = goodsService.getTypeList();
+        hashMap.put("typeList",list);
+        hashMap.put("num",list.size());
+        return hashMap;
     }
 }
