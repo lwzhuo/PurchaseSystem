@@ -6,6 +6,7 @@ import PurchaseSystem.service.IGoodsService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
@@ -28,14 +29,27 @@ public class GoodsImpl implements IGoodsService {
     }
 
     public int deleteGoods(int id){
-        return this.goodsDao.deleteGoods(id);
+        int num=0;
+        try{
+            this.goodsDao.deleteGoods(id);
+        }catch (Exception e){
+            e.printStackTrace();
+            num = -1;
+        }
+        return num;
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
     public int deleteGoodsBatch(Iterator it){
         int num=0;
-        while (it.hasNext())
-            num+=this.goodsDao.deleteGoods((int)it.next());
+        try {
+            while (it.hasNext())
+                this.goodsDao.deleteGoods((int)it.next());
+        }catch (Exception e){
+            e.printStackTrace();
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            num=-1;
+        }
         return num;
     }
 
@@ -59,8 +73,8 @@ public class GoodsImpl implements IGoodsService {
         return hashMap;
     }
 
-    public HashMap selectGoods(int base, int offset){
-        List goodsList = this.goodsDao.selectGoods(base,offset);
+    public HashMap selectGoods(int type,int base, int offset){
+        List goodsList = this.goodsDao.selectGoods(type,base,offset);
         HashMap hashMap = new HashMap();
         hashMap.put("nums",goodsList.size());
         hashMap.put("goodList",goodsList);

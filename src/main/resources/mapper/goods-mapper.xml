@@ -23,8 +23,8 @@
     <select id="selectGoods" resultMap="GoodsResultMap">
         SELECT goods.id as goods_id,goods_name,goods_price,supplier_name,goods_type.id as goods_type_id,type_name
         FROM goods,supplier,goods_type
-        WHERE goods.supplier_id=supplier.supplier_id and
-        goods.goods_type_id = goods_type.id
+        WHERE goods.supplier_id=supplier.supplier_id and goods_type_id = #{type}
+        and goods.goods_type_id = goods_type.id
         LIMIT #{base},#{offset}
     </select>
 

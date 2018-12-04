@@ -13,6 +13,6 @@ public interface IGoodsService {
     public int updateGoods(Goods goods);
     public int updateGoodsBatch(Iterator it);
     public HashMap selectGoodsById(int id);
-    public HashMap selectGoods(int base, int offset);
+    public HashMap selectGoods(int type,int base, int offset);
     public List<HashMap> getTypeList();
 }
