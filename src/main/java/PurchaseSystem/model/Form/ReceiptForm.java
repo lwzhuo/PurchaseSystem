@@ -1,11 +1,12 @@
 package PurchaseSystem.model.Form;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class ReceiptForm extends form {
     private Long orderId;
     private Long auditorId;
-    private Date receiveDate;
+    private Timestamp receiveDate;
 
     public Long getOrderId() {
         return orderId;
@@ -23,11 +24,11 @@ public class ReceiptForm extends form {
         this.auditorId = auditorId;
     }
 
-    public Date getReceiveDate() {
+    public Timestamp getReceiveDate() {
         return receiveDate;
     }
 
-    public void setReceiveDate(Date receiveDate) {
+    public void setReceiveDate(Timestamp receiveDate) {
         this.receiveDate = receiveDate;
     }
 }
