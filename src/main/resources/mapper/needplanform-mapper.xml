@@ -3,7 +3,7 @@
 <mapper namespace="PurchaseSystem.dao.Form.needPlanFormDao">
     <resultMap id="NPFormMap" type="java.util.HashMap">
         <id column="fid" property="NPFid"></id>
-        <result column="name" property="name"></result>
+        <result column="name" property="title"></result>
         <result column="status" property="status"></result>
         <result column="comment" property="comment"></result>
         <result column="make_date" property="makeDate"></result>

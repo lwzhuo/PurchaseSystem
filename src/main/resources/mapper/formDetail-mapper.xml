@@ -1,25 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="PurchaseSystem.dao.Form.needPlanFormDetailDao">
-    <resultMap id="NPFDetailMap" type="java.util.HashMap">
-        <id column="npfd_id" property="detailItemId"></id>
+<!--由于数据库中一个form对应一个detail
+    其中，每个detail的表结构一致，唯表名不同
+    且每个detail的操作基本一致
+    故此mapper文件是各种form表对应的detail表的通用mapper
+    对于要操作特定的detail表，则需要多传入一个表名的字符串参数-->
+<mapper namespace="PurchaseSystem.dao.Form.FormDetailDao">
+    <resultMap id="FormDetailMap" type="java.util.HashMap">
+        <id column="Formd_id" property="detailItemId"></id>
         <result column="form_id" property="formId"></result>
-        <result column="npfd_goodsid" property="goodsId"></result>
+        <result column="Formd_goodsid" property="goodsId"></result>
         <result column="goods_name" property="goodsName"></result>
         <result column="goods_num" property="goodsNum"></result>
     </resultMap>
     <insert id="insertDetail" keyProperty="" parameterType="java.util.List">
-      INSERT INTO needform_detail (form_id,goods_id,goods_num)
+      INSERT INTO ${table} (form_id,goods_id,goods_num)
       VALUES 
       <foreach collection="detailList" item="item" index="index" separator=",">
           (#{formid},#{item.goodsId},#{item.goodsNum})
       </foreach>
     </insert>
     <delete id="deleteDetail" parameterType="long">
-        DELETE FROM needform_detail WHERE form_id=#{formid}
+        DELETE FROM ${table} WHERE form_id=#{formid}
     </delete>
     <update id="updateDetail" parameterType="java.util.List">
-        UPDATE needform_detail
+        UPDATE ${table}
         <trim prefix="SET" suffixOverrides=",">
             goods_id=CASE id
             <foreach collection="detailList" item="detail">
@@ -37,7 +42,7 @@
                 #{detail.detailItemId}
             </foreach>
         -- 更新操作
---         update needform_detail set
+--         update ${table} set
 --         goods_id=case id
 --         when 9 then 10
 --         when 10 then 9
@@ -48,9 +53,9 @@
 --         end
 --         where id in (9,10)
     </update>
-    <select id="selectDetailByFormId" parameterType="long" resultMap="NPFDetailMap">
-        SELECT needform_detail.id as npfd_id,form_id,needform_detail.goods_id as npfd_goodsid,goods_num,goods_name
-        FROM needform_detail,goods
-        WHERE needform_detail.goods_id=goods.id AND needform_detail.form_id=#{id}
+    <select id="selectDetailByFormId" parameterType="long" resultMap="FormDetailMap">
+        SELECT ${table}.id as Formd_id,form_id,${table}.goods_id as Formd_goodsid,goods_num,goods_name
+        FROM ${table},goods
+        WHERE ${table}.goods_id=goods.id AND ${table}.form_id=#{id}
     </select>
 </mapper>
