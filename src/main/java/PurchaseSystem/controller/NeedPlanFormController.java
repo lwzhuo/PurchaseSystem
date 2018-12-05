@@ -21,8 +21,8 @@ public class NeedPlanFormController {
         else return returnJson.returnOK();
     }
 
-    @GetMapping(value = "/delete/{id}")
-    public @ResponseBody String deleteNeedPlanForm(@PathVariable("id") int id){
+    @GetMapping(value = "/delete")
+    public @ResponseBody String deleteNeedPlanForm(@RequestParam int id){
         int num = needPlanFormService.deleteNPF(id);
         if(num<0) return returnJson.returnError();
         else return returnJson.returnOK();
@@ -51,14 +51,14 @@ public class NeedPlanFormController {
         if(num<0) return returnJson.returnError();
         else return returnJson.returnOK();
     }
-    @GetMapping(value = "/{base:[0-9]+}-{offset:[0-9]+}",produces = "application/json")
-    public @ResponseBody HashMap getNeedPlanFormBatch(@PathVariable("base")int base,@PathVariable("offset")int offset){
+    @GetMapping(value = "/getnplist",produces = "application/json")
+    public @ResponseBody HashMap getNeedPlanFormBatch(@RequestParam int base,@RequestParam int offset){
         HashMap hashMap = (HashMap) needPlanFormService.getBriefNPFBatch(base,offset);
         hashMap.put("sum",needPlanFormService.getCount());
         return hashMap;
     }
-    @GetMapping(value = "/detail/{id}",produces = "application/json")
-    public @ResponseBody HashMap getNeedPlanFormDetail(@PathVariable("id")int id){
+    @GetMapping(value = "/detail/get",produces = "application/json")
+    public @ResponseBody HashMap getNeedPlanFormDetail(@RequestParam int id){
         return (HashMap) needPlanFormService.getNPFDetailById(id);
     }
 }

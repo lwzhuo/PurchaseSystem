@@ -1,17 +1,18 @@
 package PurchaseSystem.model.Form;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class NeedPlanForm extends form {
-    private Date receiveDate;
+    private Timestamp receiveDate;
     private Long makerId;
     private Integer apartment;
 
-    public Date getReceiveDate() {
+    public Timestamp getReceiveDate() {
         return receiveDate;
     }
 
-    public void setReceiveDate(Date receiveDate) {
+    public void setReceiveDate(Timestamp receiveDate) {
         this.receiveDate = receiveDate;
     }
 

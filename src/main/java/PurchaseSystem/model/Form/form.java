@@ -2,16 +2,17 @@ package PurchaseSystem.model.Form;
 
 import PurchaseSystem.model.Goods.DetailItem;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
 public abstract class form {
     private Long id;
-    private String name;
+    private String title;
     private Integer status;
     private String comment;
     private List<DetailItem> detailList;
-    private Date makeDate;
+    private Timestamp makeDate;
 
     public Long getId() {
         return id;
@@ -21,12 +22,12 @@ public abstract class form {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public Integer getStatus() {
@@ -53,11 +54,11 @@ public abstract class form {
         this.detailList = detailList;
     }
 
-    public Date getMakeDate() {
+    public Timestamp getMakeDate() {
         return makeDate;
     }
 
-    public void setMakeDate(Date makeDate) {
+    public void setMakeDate(Timestamp makeDate) {
         this.makeDate = makeDate;
     }
 }

@@ -25,10 +25,10 @@ public class goodsController {
     }
 
     //delete
-    @GetMapping(value = "/delete/{id:[0-9]+}",produces = "application/json")
-    public String deleteGoods(@PathVariable("id")int id){
+    @GetMapping(value = "/delete",produces = "application/json")
+    public String deleteGoods(@RequestParam int id){
         int num = goodsService.deleteGoods(id);
-        if(num==1) return returnJson.returnOK();
+        if(num==0) return returnJson.returnOK();
         else return returnJson.returnError();
     }
 
@@ -38,7 +38,7 @@ public class goodsController {
         Iterator iterator = deleteList.iterator();
         hashMap.remove("deleteList");
         int num = goodsService.deleteGoodsBatch(iterator);
-        if(num==deleteList.size()) return returnJson.returnOK();
+        if(num==0) return returnJson.returnOK();
         else return returnJson.returnError();
     }
 
@@ -61,14 +61,14 @@ public class goodsController {
         else return returnJson.returnError();
     }
     //select
-    @GetMapping(value = "/{id:[0-9]+}",produces = "application/json")
-    public @ResponseBody HashMap getGoods(@PathVariable("id")int id){
+    @GetMapping(value = "/get",produces = "application/json")
+    public @ResponseBody HashMap getGoods(@RequestParam int id){
         return goodsService.selectGoodsById(id);
     }
 
-    @GetMapping(value = "/{base:[0-9]+}-{offset:[0-9]+}",produces = "application/json")
-    public @ResponseBody HashMap getGoodsList(@PathVariable("base")int base,@PathVariable("offset")int offset){
-        return goodsService.selectGoods(base,offset);
+    @GetMapping(value = "/getlist",produces = "application/json")
+    public @ResponseBody HashMap getGoodsList(@RequestParam int type,@RequestParam int base,@RequestParam int offset){
+        return goodsService.selectGoods(type,base,offset);
     }
 
     @GetMapping(value = "/typelist",produces = "application/json")

@@ -1,7 +1,7 @@
 package PurchaseSystem.service.implement.form;
 
 import PurchaseSystem.dao.Form.needPlanFormDao;
-import PurchaseSystem.dao.Form.needPlanFormDetailDao;
+import PurchaseSystem.dao.Form.FormDetailDao;
 import PurchaseSystem.model.Form.NeedPlanForm;
 import PurchaseSystem.service.IneedPlanFormService;
 import org.springframework.stereotype.Service;
@@ -13,14 +13,13 @@ import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 @Service("needPlanFormService")
 public class needPlanFormImpl implements IneedPlanFormService {
     @Resource
     private needPlanFormDao npfDao;
     @Resource
-    private needPlanFormDetailDao npfdDao;
+    private FormDetailDao npfdDao;
 
     @Transactional(propagation = Propagation.REQUIRED)
     public int addNPF(NeedPlanForm npf){
@@ -28,7 +27,7 @@ public class needPlanFormImpl implements IneedPlanFormService {
         try {
             List detailList = npf.getDetailList();
             npfDao.insertNPForm(npf);
-            npfdDao.insertDetail(detailList,npf.getId());
+            npfdDao.insertDetail("needform_detail",detailList,npf.getId());
         }catch (Exception e){
             e.printStackTrace();
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();//手动执行回滚
@@ -41,7 +40,7 @@ public class needPlanFormImpl implements IneedPlanFormService {
     public int deleteNPF(int id){
         int num=0;
         try {
-            npfdDao.deleteDetail(id);
+            npfdDao.deleteDetail("needform_detail",id);
             npfDao.deleteNPForm(id);
         }catch (Exception e){
             e.printStackTrace();
@@ -56,7 +55,7 @@ public class needPlanFormImpl implements IneedPlanFormService {
         int num=0;
         try {
             for(int id:deleteList){
-                npfdDao.deleteDetail(id);
+                npfdDao.deleteDetail("needform_detail",id);
                 npfDao.deleteNPForm(id);
             }
         }catch (Exception e){
@@ -72,7 +71,7 @@ public class needPlanFormImpl implements IneedPlanFormService {
         try {
             npfDao.updateNPForm(npf);
             if(npf.getDetailList()!=null)
-                npfdDao.updateDetail(npf.getDetailList());
+                npfdDao.updateDetail("needform_detail",npf.getDetailList());
         }catch (Exception e) {
             e.printStackTrace();
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
@@ -89,7 +88,7 @@ public class needPlanFormImpl implements IneedPlanFormService {
                 NeedPlanForm npf = (NeedPlanForm)it.next();
                 npfDao.updateNPForm(npf);
                 if(npf.getDetailList()!=null)
-                    npfdDao.updateDetail(npf.getDetailList());
+                    npfdDao.updateDetail("needform_detail",npf.getDetailList());
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -108,7 +107,7 @@ public class needPlanFormImpl implements IneedPlanFormService {
 
     public HashMap getNPFDetailById(int id){//获得某一需求计划单的详情货物信息
         HashMap map = new HashMap();
-        List list = npfdDao.selectDetailByFormId(id);
+        List list = npfdDao.selectDetailByFormId("needform_detail",id);
         map.put("detailList",list);
         map.put("num",list.size());
         map.put("formId",id);
