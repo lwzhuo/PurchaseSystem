@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="PurchaseSystem.dao.Form.outStoreFormDao">
+    <resultMap id="OSFormMap" type="java.util.HashMap">
+        <id column="fid" property="formid"></id>
+        <result column="name" property="title"></result>
+        <result column="status" property="status"></result>
+        <result column="comment" property="comment"></result>
+        <result column="make_date" property="makeDate"></result>
+        <result column="auditor_id" property="auditorId"></result>
+        <result column="employee_name" property="auditor"></result>
+    </resultMap>
+    <insert id="insertForm" useGeneratedKeys="true" keyProperty="id" parameterType="PurchaseSystem.model.Store.OutStoreForm">
+        INSERT INTO outstore_form (name, status, comment, make_date, auditor_id)
+        VALUES(#{title},#{status},#{comment},#{makeDate},#{auditorId})
+    </insert>
+
+    <delete id="deleteForm" parameterType="Integer">
+        DELETE FROM outstore_form WHERE id=#{id}
+    </delete>
+
+    <update id="updateForm" parameterType="PurchaseSystem.model.Store.OutStoreForm">
+        UPDATE outstore_form
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title!=null">name=#{title},</if>
+            <if test="status!=null">status=#{status},</if>
+            <if test="comment!=null">comment=#{comment},</if>
+            <if test="makeDate!=null">make_date=#{makeDate},</if>
+            <if test="auditorId!=null">auditor_id=#{auditorId},</if>
+        </trim>
+        WHERE id=#{id}
+    </update>
+
+    <select id="selectFormBatch" resultMap="OSFormMap">
+        SELECT outstore_form.id as fid ,outstore_form.name,status,comment,
+        make_date,auditor_id,employee.name as employee_name,
+        FROM outstore_form,employee
+        WHERE auditor_id=employee.id
+        ORDER BY fid
+        LIMIT #{base},#{offset}
+    </select>
+
+    <select id="getCount" resultType="int">
+        SELECT COUNT(*) FROM purchase.outstore_form
+    </select>
+</mapper>
