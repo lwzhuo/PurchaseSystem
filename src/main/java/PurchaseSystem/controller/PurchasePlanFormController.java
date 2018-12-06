@@ -16,8 +16,8 @@ public class PurchasePlanFormController {
     IpurchasePlanFormService purchasePlanFormService;
     @PostMapping(value = "/insert",consumes = "application/json",produces = "application/json")
     public @ResponseBody
-    String addPurchasePlanForm(@RequestBody PurchasePlanForm npf){
-        int num = purchasePlanFormService.addPPF(npf);
+    String addPurchasePlanForm(@RequestBody PurchasePlanForm form){
+        int num = purchasePlanFormService.addPPF(form);
         if(num<0) return returnJson.returnError();
         else return returnJson.returnOK();
     }
@@ -39,16 +39,16 @@ public class PurchasePlanFormController {
 
     @PostMapping(value = "update",consumes = "application/json",produces = "application/json")
     public @ResponseBody String updatePurchasePlanForm(@RequestBody HashMap<String,PurchasePlanForm> hashMap){
-        PurchasePlanForm npf = hashMap.get("form");
-        int num = purchasePlanFormService.updatePPF(npf);
+        PurchasePlanForm form = hashMap.get("form");
+        int num = purchasePlanFormService.updatePPF(form);
         if(num<0) return returnJson.returnError();
         else return returnJson.returnOK();
     }
 
     @PostMapping(value = "updatebatch",consumes = "application/json",produces = "application/json")
     public @ResponseBody String updatePurchasePlanFormBatch(@RequestBody HashMap<String,List<PurchasePlanForm>> hashMap){
-        List<PurchasePlanForm> npflist = hashMap.get("formlist");
-        int num = purchasePlanFormService.updatePPFBatch(npflist);
+        List<PurchasePlanForm> formlist = hashMap.get("formlist");
+        int num = purchasePlanFormService.updatePPFBatch(formlist);
         if(num<0) return returnJson.returnError();
         else return returnJson.returnOK();
     }
