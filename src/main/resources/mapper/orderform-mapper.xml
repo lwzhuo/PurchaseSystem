@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="PurchaseSystem.dao.Form.orderFormDao">
+    <resultMap id="OFormMap" type="java.util.HashMap">
+        <id column="fid" property="formId"></id>
+        <result column="name" property="title"></result>
+        <result column="status" property="status"></result>
+        <result column="comment" property="comment"></result>
+        <result column="make_date" property="makeDate"></result>
+        <result column="supplier_id" property="supplierId"></result>
+        <result column="supplier_name" property="supplierName"></result>
+        <result column="amount" property="amount"></result>
+        <result column="auditor_id" property="auditorId"></result>
+        <result column="auditor_name" property="auditorName"></result>
+        <result column="contract_path" property="contractPath"></result>
+    </resultMap>
+    <insert id="insertForm" useGeneratedKeys="true" keyProperty="id" parameterType="PurchaseSystem.model.Form.OrderForm">
+        INSERT INTO order_form (name, status, comment, make_date, supplier_id,amount,auditor_id,contract_path)
+        VALUES(#{title},#{status},#{comment},#{makeDate},#{supplierId},#{amount},#{auditorId},#{contractPath})
+    </insert>
+
+    <delete id="deleteForm" parameterType="Integer">
+        DELETE FROM order_form WHERE id=#{id}
+    </delete>
+
+    <update id="updateForm" parameterType="PurchaseSystem.model.Form.OrderForm">
+        UPDATE order_form
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title!=null">name=#{title},</if>
+            <if test="status!=null">status=#{status},</if>
+            <if test="comment!=null">comment=#{comment},</if>
+            <if test="makeDate!=null">make_date=#{makeDate},</if>
+            <if test="supplierId!=null">supplier_id=#{supplierId}</if>
+            <if test="amount!=null">amonut=#{amount}</if>
+            <if test="auditorId!=null">auditor_id=#{auditorId}</if>
+            <if test="contractPath!=null">contract_path=#{contractPath}</if>
+        </trim>
+        WHERE id=#{id}
+    </update>
+
+    <select id="selectFormBatch" resultMap="OFormMap">
+        SELECT order_form.id as fid ,order_form.name,status,comment,
+        make_date,supplier_id,supplier_name,amount,autitor_id,contract_path,employee.name as auditor_name
+        FROM order_form,employee,supplier
+        WHERE auditor_id=employee.id AND supplier.supplier_id=order_form.supplier_id
+        ORDER BY fid
+        LIMIT #{base},#{offset}
+    </select>
+
+    <select id="getCount" resultType="int">
+        SELECT COUNT(*) FROM purchase.order_form
+    </select>
+</mapper>
