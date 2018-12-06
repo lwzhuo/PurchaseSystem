@@ -38,7 +38,7 @@ public class NeedPlanFormController {
 
     @PostMapping(value = "update",consumes = "application/json",produces = "application/json")
     public @ResponseBody String updateNeedPlanForm(@RequestBody HashMap<String,NeedPlanForm> hashMap){
-        NeedPlanForm npf = (NeedPlanForm)hashMap.get("npform");
+        NeedPlanForm npf = hashMap.get("npform");
         int num = needPlanFormService.updateNPF(npf);
         if(num<0) return returnJson.returnError();
         else return returnJson.returnOK();
@@ -46,7 +46,7 @@ public class NeedPlanFormController {
 
     @PostMapping(value = "updatebatch",consumes = "application/json",produces = "application/json")
     public @ResponseBody String updateNeedPlanFormBatch(@RequestBody HashMap<String,List<NeedPlanForm>> hashMap){
-        List<NeedPlanForm> npflist = hashMap.get("npfList");
+        List<NeedPlanForm> npflist = hashMap.get("npflist");
         int num = needPlanFormService.updateNPFBatch(npflist);
         if(num<0) return returnJson.returnError();
         else return returnJson.returnOK();

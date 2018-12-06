@@ -1,7 +1,6 @@
 package PurchaseSystem.model.Form;
 
 import java.sql.Timestamp;
-import java.util.Date;
 
 public class ReceiptForm extends form {
     private Long orderId;
