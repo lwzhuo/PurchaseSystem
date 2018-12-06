@@ -51,7 +51,7 @@ public class NeedPlanFormController {
         if(num<0) return returnJson.returnError();
         else return returnJson.returnOK();
     }
-    @GetMapping(value = "/getnplist",produces = "application/json")
+    @GetMapping(value = "/getlist",produces = "application/json")
     public @ResponseBody HashMap getNeedPlanFormBatch(@RequestParam int base,@RequestParam int offset){
         HashMap hashMap = (HashMap) needPlanFormService.getBriefNPFBatch(base,offset);
         hashMap.put("sum",needPlanFormService.getCount());
