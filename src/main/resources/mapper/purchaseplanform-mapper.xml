@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="PurchaseSystem.dao.Form.purchasePlanFormDao">
+    <resultMap id="PPFormMap" type="java.util.HashMap">
+        <id column="fid" property="formid"></id>
+        <result column="name" property="title"></result>
+        <result column="status" property="status"></result>
+        <result column="comment" property="comment"></result>
+        <result column="make_date" property="makeDate"></result>
+        <result column="maker_id" property="makerId"></result>
+        <result column="employee_name" property="maker"></result>
+    </resultMap>
+    <insert id="insertForm" useGeneratedKeys="true" keyProperty="id" parameterType="PurchaseSystem.model.Form.PurchasePlanForm">
+        INSERT INTO purchaseplan_form (name, status, comment, make_date, maker_id)
+        VALUES(#{title},#{status},#{comment},#{makeDate},#{makerId})
+    </insert>
+
+    <delete id="deleteForm" parameterType="Integer">
+        DELETE FROM purchaseplan_form WHERE id=#{id}
+    </delete>
+
+    <update id="updateForm" parameterType="PurchaseSystem.model.Form.PurchasePlanForm">
+        UPDATE purchaseplan_form
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title!=null">name=#{title},</if>
+            <if test="status!=null">status=#{status},</if>
+            <if test="comment!=null">comment=#{comment},</if>
+            <if test="makeDate!=null">make_date=#{makeDate},</if>
+            <if test="makerId!=null">maker_id=#{makerId},</if>
+        </trim>
+        WHERE id=#{id}
+    </update>
+
+    <select id="selectFormBatch" resultMap="PPFormMap">
+        SELECT purchaseplan_form.id as fid ,purchaseplan_form.name,status,comment,
+        make_date,employee.name as employee_name,maker_id
+        FROM purchaseplan_form,employee
+        WHERE maker_id=employee.id
+        ORDER BY fid
+        LIMIT #{base},#{offset}
+    </select>
+
+    <select id="getCount" resultType="int">
+        SELECT COUNT(*) FROM purchase.purchaseplan_form
+    </select>
+</mapper>

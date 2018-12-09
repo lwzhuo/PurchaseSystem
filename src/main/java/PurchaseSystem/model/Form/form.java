@@ -3,10 +3,9 @@ package PurchaseSystem.model.Form;
 import PurchaseSystem.model.Goods.DetailItem;
 
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.List;
 
-public abstract class form {
+public class form {
     private Long id;
     private String title;
     private Integer status;

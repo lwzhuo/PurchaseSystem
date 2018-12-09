@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="PurchaseSystem.dao.Form.needPlanFormDao">
     <resultMap id="NPFormMap" type="java.util.HashMap">
-        <id column="fid" property="NPFid"></id>
+        <id column="fid" property="formid"></id>
         <result column="name" property="title"></result>
         <result column="status" property="status"></result>
         <result column="comment" property="comment"></result>
@@ -13,19 +13,19 @@
         <result column="employee_name" property="maker"></result>
         <result column="apartment_name" property="apartment"></result>
     </resultMap>
-    <insert id="insertNPForm" useGeneratedKeys="true" keyProperty="id" parameterType="PurchaseSystem.model.Form.NeedPlanForm">
+    <insert id="insertForm" useGeneratedKeys="true" keyProperty="id" parameterType="PurchaseSystem.model.Form.NeedPlanForm">
         INSERT INTO needplan_form (name, status, comment, make_date, maker_id, apartment_id)
-        VALUES(#{name},#{status},#{comment},#{makeDate},#{makerId},#{apartment})
+        VALUES(#{title},#{status},#{comment},#{makeDate},#{makerId},#{apartment})
     </insert>
 
-    <delete id="deleteNPForm" parameterType="Integer">
+    <delete id="deleteForm" parameterType="Integer">
         DELETE FROM needplan_form WHERE id=#{id}
     </delete>
 
-    <update id="updateNPForm" parameterType="PurchaseSystem.model.Form.NeedPlanForm">
+    <update id="updateForm" parameterType="PurchaseSystem.model.Form.NeedPlanForm">
         UPDATE needplan_form
         <trim prefix="SET" suffixOverrides=",">
-            <if test="name!=null">name=#{name},</if>
+            <if test="title!=null">name=#{title},</if>
             <if test="status!=null">status=#{status},</if>
             <if test="comment!=null">comment=#{comment},</if>
             <if test="makeDate!=null">make_date=#{makeDate},</if>
@@ -36,7 +36,7 @@
         WHERE id=#{id}
     </update>
 
-    <select id="selectNPFormBatch" resultMap="NPFormMap">
+    <select id="selectFormBatch" resultMap="NPFormMap">
         SELECT needplan_form.id as fid ,needplan_form.name,status,comment,
         make_date,receive_date,employee.name as employee_name,
         apartment.name as apartment_name,maker_id,needplan_form.apartment_id
