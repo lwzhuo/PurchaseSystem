@@ -35,7 +35,7 @@
 
     <select id="selectFormBatch" resultMap="ISFormMap">
         SELECT instore_form.id as fid ,instore_form.name,status,comment,
-        make_date,auditor_id,receipt_id,employee.name as employee_name,
+        make_date,auditor_id,receipt_id,employee.name as employee_name
         FROM instore_form,employee
         WHERE auditor_id=employee.id
         ORDER BY fid

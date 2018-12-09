@@ -15,7 +15,7 @@ import java.util.Map;
 
 @Service("outStoreFormService")
 public class outStoreFormImpl extends abstractFormImpl implements IoutStoreFormService {
-    @Resource(name = "inStoreFormDao")
+    @Resource(name = "outStoreFormDao")
     public void setFormDao(FormDao formDao){
         this.formDao = formDao;
     }
