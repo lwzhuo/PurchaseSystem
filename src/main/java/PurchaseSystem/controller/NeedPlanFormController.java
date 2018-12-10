@@ -1,6 +1,7 @@
 package PurchaseSystem.controller;
 
 import PurchaseSystem.model.Form.NeedPlanForm;
+import PurchaseSystem.model.Goods.DetailItem;
 import PurchaseSystem.service.IneedPlanFormService;
 import PurchaseSystem.util.returnJson;
 import org.springframework.web.bind.annotation.*;
@@ -60,5 +61,20 @@ public class NeedPlanFormController {
     @GetMapping(value = "/detail/get",produces = "application/json")
     public @ResponseBody HashMap getNeedPlanFormDetail(@RequestParam int id){
         return (HashMap) needPlanFormService.getNPFDetailById(id);
+    }
+    @PostMapping(value = "/detail/insert",consumes = "application/json",produces = "application/json")
+    public @ResponseBody String insertDetailItem(@RequestBody HashMap hashMap){
+        int formid = (int)hashMap.get("formId");
+        List<DetailItem> detailItems = (List<DetailItem>)hashMap.get("detailList");
+        int num = needPlanFormService.addNPFDetailItem(formid,detailItems);
+        if(num<0) return returnJson.returnError();
+        else return returnJson.returnOK();
+    }
+    @PostMapping(value = "/detail/delete",consumes = "application/json",produces = "application/json")
+    public @ResponseBody String deleteDetailItem(@RequestBody HashMap hashMap){
+        List<Integer> detailItems = (List<Integer>)hashMap.get("deleteList");
+        int num = needPlanFormService.deleteNPFDetailItem(detailItems);
+        if(num<0) return returnJson.returnError();
+        else return returnJson.returnOK();
     }
 }

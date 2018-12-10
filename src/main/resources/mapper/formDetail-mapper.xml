@@ -23,6 +23,9 @@
     <delete id="deleteDetail" parameterType="long">
         DELETE FROM ${table} WHERE form_id=#{formid}
     </delete>
+    <delete id="deleteDetailItem">
+        DELETE FROM ${table} WHERE id=#{id}
+    </delete>
     <update id="updateDetail" parameterType="java.util.List">
         UPDATE ${table}
         <trim prefix="SET" suffixOverrides=",">

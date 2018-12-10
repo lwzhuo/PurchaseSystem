@@ -3,6 +3,7 @@ package PurchaseSystem.service.implement.form;
 import PurchaseSystem.dao.Form.FormDao;
 import PurchaseSystem.dao.Form.FormDetailDao;
 import PurchaseSystem.model.Form.NeedPlanForm;
+import PurchaseSystem.model.Goods.DetailItem;
 import PurchaseSystem.service.IneedPlanFormService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -19,38 +20,57 @@ public class needPlanFormImpl extends abstractFormImpl implements IneedPlanFormS
     public void setFormDao(FormDao formDao){
         this.formDao = formDao;
     }
+
     @Value("needform_detail")
     public void setTablename(String tablename){
         this.tablename = tablename;
     }
+
     @Resource
     public void setFdDao(FormDetailDao fdDao){
         this.fdDao = fdDao;
     }
+
     @Transactional(propagation = Propagation.REQUIRED)
     public int addNPF(NeedPlanForm form){
         return addForm(form);
     }
+
     @Transactional(propagation = Propagation.REQUIRED)
     public int deleteNPF(int id){
         return deleteForm(id);
     }
+
     @Transactional(propagation = Propagation.REQUIRED)
     public int deleteNPFBatch(List<Integer> deleteList){
         return deleteFormBatch(deleteList);
     }
+
     @Transactional(propagation = Propagation.REQUIRED)
     public int updateNPF(NeedPlanForm form){
         return updateForm(form);
     }
+
     @Transactional(propagation = Propagation.REQUIRED)
     public int updateNPFBatch(List<NeedPlanForm> formList){
         return updateFormBatch(formList);
     }
+
     public Map getBriefNPFBatch(int base, int offset) {//没有详细的具体货物信息，只是摘要
         return getBriefFormBatch(base,offset);
     }
+
     public Map getNPFDetailById(int id){//获得某一需求计划单的详情货物信息
         return getFormDetailById(id);
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    public int deleteNPFDetailItem(List<Integer> deleteList){
+        return deleteFormDetailItem(deleteList);
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    public int addNPFDetailItem(int formid,List<DetailItem> detailList){
+        return addFormDetailItem(formid,detailList);
     }
 }

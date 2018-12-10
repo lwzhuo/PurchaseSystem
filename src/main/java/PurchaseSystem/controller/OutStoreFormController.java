@@ -1,5 +1,6 @@
 package PurchaseSystem.controller;
 
+import PurchaseSystem.model.Goods.DetailItem;
 import PurchaseSystem.model.Store.OutStoreForm;
 import PurchaseSystem.service.IoutStoreFormService;
 import PurchaseSystem.util.returnJson;
@@ -61,5 +62,20 @@ public class OutStoreFormController {
     @GetMapping(value = "/detail/get",produces = "application/json")
     public @ResponseBody HashMap getOutStoreFormDetail(@RequestParam int id){
         return (HashMap) outStoreFormService.getOSFDetailById(id);
+    }
+    @PostMapping(value = "/detail/insert",consumes = "application/json",produces = "application/json")
+    public @ResponseBody String insertDetailItem(@RequestBody HashMap hashMap){
+        int formid = (int)hashMap.get("formId");
+        List<DetailItem> detailItems = (List<DetailItem>)hashMap.get("detailList");
+        int num = outStoreFormService.addOSFDetailItem(formid,detailItems);
+        if(num<0) return returnJson.returnError();
+        else return returnJson.returnOK();
+    }
+    @PostMapping(value = "/detail/delete",consumes = "application/json",produces = "application/json")
+    public @ResponseBody String deleteDetailItem(@RequestBody HashMap hashMap){
+        List<Integer> detailItems = (List<Integer>)hashMap.get("deleteList");
+        int num = outStoreFormService.deleteOSFDetailItem(detailItems);
+        if(num<0) return returnJson.returnError();
+        else return returnJson.returnOK();
     }
 }

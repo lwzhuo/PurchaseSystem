@@ -1,6 +1,7 @@
 package PurchaseSystem.controller;
 
 import PurchaseSystem.model.Form.ReceiptForm;
+import PurchaseSystem.model.Goods.DetailItem;
 import PurchaseSystem.service.IreceiptFormService;
 import PurchaseSystem.util.returnJson;
 import org.springframework.web.bind.annotation.*;
@@ -61,5 +62,20 @@ public class ReceiptFormController {
     @GetMapping(value = "/detail/get",produces = "application/json")
     public @ResponseBody HashMap getReceiptFormDetail(@RequestParam int id){
         return (HashMap) receiptFormService.getRFDetailById(id);
+    }
+    @PostMapping(value = "/detail/insert",consumes = "application/json",produces = "application/json")
+    public @ResponseBody String insertDetailItem(@RequestBody HashMap hashMap){
+        int formid = (int)hashMap.get("formId");
+        List<DetailItem> detailItems = (List<DetailItem>)hashMap.get("detailList");
+        int num = receiptFormService.addRFDetailItem(formid,detailItems);
+        if(num<0) return returnJson.returnError();
+        else return returnJson.returnOK();
+    }
+    @PostMapping(value = "/detail/delete",consumes = "application/json",produces = "application/json")
+    public @ResponseBody String deleteDetailItem(@RequestBody HashMap hashMap){
+        List<Integer> detailItems = (List<Integer>)hashMap.get("deleteList");
+        int num = receiptFormService.deleteRFDetailItem(detailItems);
+        if(num<0) return returnJson.returnError();
+        else return returnJson.returnOK();
     }
 }
