@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface IinStoreFormService {
-    public int addISF(InStoreForm form);
+    public long addISF(InStoreForm form);
     public int deleteISF(int id);
     public int deleteISFBatch(List<Integer> deleteList);
     public int updateISF(InStoreForm form);

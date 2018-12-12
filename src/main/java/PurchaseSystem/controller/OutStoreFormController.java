@@ -18,9 +18,9 @@ public class OutStoreFormController {
     @PostMapping(value = "/insert",consumes = "application/json",produces = "application/json")
     public @ResponseBody
     String addOutStoreForm(@RequestBody OutStoreForm form){
-        int num = outStoreFormService.addOSF(form);
+        long num = outStoreFormService.addOSF(form);
         if(num<0) return returnJson.returnError();
-        else return returnJson.returnOK();
+        else return returnJson.returnOKWithExtraData("formId",num);
     }
 
     @GetMapping(value = "/delete")

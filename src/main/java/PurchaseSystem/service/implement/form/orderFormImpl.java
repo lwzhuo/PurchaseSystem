@@ -32,7 +32,7 @@ public class orderFormImpl extends abstractFormImpl implements IorderFormService
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public int addOF(OrderForm form){
+    public long addOF(OrderForm form){
         return addForm(form);
     }
 

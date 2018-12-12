@@ -18,9 +18,9 @@ public class InStoreFormController {
     @PostMapping(value = "/insert",consumes = "application/json",produces = "application/json")
     public @ResponseBody
     String addInStoreForm(@RequestBody InStoreForm form){
-        int num = inStoreFormService.addISF(form);
+        long num = inStoreFormService.addISF(form);
         if(num<0) return returnJson.returnError();
-        else return returnJson.returnOK();
+        else return returnJson.returnOKWithExtraData("formId",num);
     }
 
     @GetMapping(value = "/delete")

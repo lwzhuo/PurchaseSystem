@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface IneedPlanFormService {
-    public int addNPF(NeedPlanForm form);
+    public long addNPF(NeedPlanForm form);
     public int deleteNPF(int id);
     public int deleteNPFBatch(List<Integer> deleteList);
     public int updateNPF(NeedPlanForm form);

@@ -32,7 +32,7 @@ public class receiptFormImpl extends abstractFormImpl implements IreceiptFormSer
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public int addRF(ReceiptForm form){
+    public long addRF(ReceiptForm form){
         return addForm(form);
     }
 

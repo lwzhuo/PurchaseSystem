@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface IorderFormService {
-    public int addOF(OrderForm form);
+    public long addOF(OrderForm form);
     public int deleteOF(int id);
     public int deleteOFBatch(List<Integer> deleteList);
     public int updateOF(OrderForm form);

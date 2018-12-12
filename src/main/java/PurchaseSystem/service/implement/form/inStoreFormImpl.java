@@ -32,7 +32,7 @@ public class inStoreFormImpl extends abstractFormImpl implements IinStoreFormSer
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public int addISF(InStoreForm form){
+    public long addISF(InStoreForm form){
         return addForm(form);
     }
 

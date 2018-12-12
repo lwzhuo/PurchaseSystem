@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface IreceiptFormService {
-    public int addRF(ReceiptForm form);
+    public long addRF(ReceiptForm form);
     public int deleteRF(int id);
     public int deleteRFBatch(List<Integer> deleteList);
     public int updateRF(ReceiptForm form);

@@ -32,7 +32,7 @@ public class outStoreFormImpl extends abstractFormImpl implements IoutStoreFormS
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public int addOSF(OutStoreForm form){
+    public long addOSF(OutStoreForm form){
         return addForm(form);
     }
 

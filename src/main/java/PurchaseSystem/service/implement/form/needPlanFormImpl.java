@@ -32,7 +32,7 @@ public class needPlanFormImpl extends abstractFormImpl implements IneedPlanFormS
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public int addNPF(NeedPlanForm form){
+    public long addNPF(NeedPlanForm form){
         return addForm(form);
     }
 

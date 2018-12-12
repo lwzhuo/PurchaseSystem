@@ -18,9 +18,9 @@ public class OrderFormController {
     @PostMapping(value = "/insert",consumes = "application/json",produces = "application/json")
     public @ResponseBody
     String addOrderForm(@RequestBody OrderForm form){
-        int num = orderFormService.addOF(form);
+        long num = orderFormService.addOF(form);
         if(num<0) return returnJson.returnError();
-        else return returnJson.returnOK();
+        else return returnJson.returnOKWithExtraData("formId",num);
     }
 
     @GetMapping(value = "/delete")

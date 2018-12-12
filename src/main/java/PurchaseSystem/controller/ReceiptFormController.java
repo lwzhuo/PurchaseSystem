@@ -18,9 +18,9 @@ public class ReceiptFormController {
     @PostMapping(value = "/insert",consumes = "application/json",produces = "application/json")
     public @ResponseBody
     String addReceiptForm(@RequestBody ReceiptForm form){
-        int num = receiptFormService.addRF(form);
+        long num = receiptFormService.addRF(form);
         if(num<0) return returnJson.returnError();
-        else return returnJson.returnOK();
+        else return returnJson.returnOKWithExtraData("formId",num);
     }
 
     @GetMapping(value = "/delete")

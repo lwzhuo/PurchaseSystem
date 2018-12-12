@@ -19,12 +19,14 @@ public abstract class abstractFormImpl {
     public abstract void setFdDao(FormDetailDao fdDao);
     public abstract void setTablename(String tablename);
     //新增一个表
-    public int addForm(form f){
-        int num=0;
+    public long addForm(form f){
+        long num=0;
         try {
             List detailList = f.getDetailList();
             formDao.insertForm(f);
             fdDao.insertDetail(tablename,detailList,f.getId());
+            num = f.getId();
+            System.out.println(num);
         }catch (Exception e){
             e.printStackTrace();
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();//手动执行回滚
@@ -122,8 +124,8 @@ public abstract class abstractFormImpl {
     public HashMap getBriefFormBatch(int base, int offset){//没有详细的具体货物信息，只是摘要
         HashMap map = new HashMap();
         List list = formDao.selectFormBatch(base,offset);
-        map.put("formList",list);
         map.put("batchNum",list.size());
+        map.put("formList",list);
         return map;
     }
     //获得某一个表的对应detail项

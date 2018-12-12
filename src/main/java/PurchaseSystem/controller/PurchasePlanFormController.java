@@ -18,9 +18,9 @@ public class PurchasePlanFormController {
     @PostMapping(value = "/insert",consumes = "application/json",produces = "application/json")
     public @ResponseBody
     String addPurchasePlanForm(@RequestBody PurchasePlanForm form){
-        int num = purchasePlanFormService.addPPF(form);
+        long num = purchasePlanFormService.addPPF(form);
         if(num<0) return returnJson.returnError();
-        else return returnJson.returnOK();
+        else return returnJson.returnOKWithExtraData("formId",num);
     }
 
     @GetMapping(value = "/delete")

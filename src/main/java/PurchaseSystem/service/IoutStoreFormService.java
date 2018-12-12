@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface IoutStoreFormService {
-    public int addOSF(OutStoreForm form);
+    public long addOSF(OutStoreForm form);
     public int deleteOSF(int id);
     public int deleteOSFBatch(List<Integer> deleteList);
     public int updateOSF(OutStoreForm form);

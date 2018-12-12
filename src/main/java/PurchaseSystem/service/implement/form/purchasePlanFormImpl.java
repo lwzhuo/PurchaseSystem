@@ -32,7 +32,7 @@ public class purchasePlanFormImpl extends abstractFormImpl implements IpurchaseP
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public int addPPF(PurchasePlanForm form){
+    public long addPPF(PurchasePlanForm form){
         return addForm(form);
     }
 

@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface IpurchasePlanFormService {
-    public int addPPF(PurchasePlanForm form);
+    public long addPPF(PurchasePlanForm form);
     public int deletePPF(int id);
     public int deletePPFBatch(List<Integer> deleteList);
     public int updatePPF(PurchasePlanForm form);

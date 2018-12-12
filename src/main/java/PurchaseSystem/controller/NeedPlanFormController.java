@@ -17,9 +17,9 @@ public class NeedPlanFormController {
     IneedPlanFormService needPlanFormService;
     @PostMapping(value = "/insert",consumes = "application/json",produces = "application/json")
     public @ResponseBody String addNeedPlanForm(@RequestBody NeedPlanForm form){
-        int num = needPlanFormService.addNPF(form);
+        long num = needPlanFormService.addNPF(form);
         if(num<0) return returnJson.returnError();
-        else return returnJson.returnOK();
+        else return returnJson.returnOKWithExtraData("formId",num);//返回刚刚添加的表的id
     }
 
     @GetMapping(value = "/delete")
