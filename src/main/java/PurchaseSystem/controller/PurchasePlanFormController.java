@@ -1,6 +1,7 @@
 package PurchaseSystem.controller;
 
 import PurchaseSystem.model.Form.PurchasePlanForm;
+import PurchaseSystem.model.Goods.DetailItem;
 import PurchaseSystem.service.IpurchasePlanFormService;
 import PurchaseSystem.util.returnJson;
 import org.springframework.web.bind.annotation.*;
@@ -17,9 +18,9 @@ public class PurchasePlanFormController {
     @PostMapping(value = "/insert",consumes = "application/json",produces = "application/json")
     public @ResponseBody
     String addPurchasePlanForm(@RequestBody PurchasePlanForm form){
-        int num = purchasePlanFormService.addPPF(form);
+        long num = purchasePlanFormService.addPPF(form);
         if(num<0) return returnJson.returnError();
-        else return returnJson.returnOK();
+        else return returnJson.returnOKWithExtraData("formId",num);
     }
 
     @GetMapping(value = "/delete")
@@ -61,5 +62,20 @@ public class PurchasePlanFormController {
     @GetMapping(value = "/detail/get",produces = "application/json")
     public @ResponseBody HashMap getPurchasePlanFormDetail(@RequestParam int id){
         return (HashMap) purchasePlanFormService.getPPFDetailById(id);
+    }
+    @PostMapping(value = "/detail/insert",consumes = "application/json",produces = "application/json")
+    public @ResponseBody String insertDetailItem(@RequestBody HashMap hashMap){
+        int formid = (int)hashMap.get("formId");
+        List<DetailItem> detailItems = (List<DetailItem>)hashMap.get("detailList");
+        int num = purchasePlanFormService.addPPFDetailItem(formid,detailItems);
+        if(num<0) return returnJson.returnError();
+        else return returnJson.returnOK();
+    }
+    @PostMapping(value = "/detail/delete",consumes = "application/json",produces = "application/json")
+    public @ResponseBody String deleteDetailItem(@RequestBody HashMap hashMap){
+        List<Integer> detailItems = (List<Integer>)hashMap.get("deleteList");
+        int num = purchasePlanFormService.deletePPFDetailItem(detailItems);
+        if(num<0) return returnJson.returnError();
+        else return returnJson.returnOK();
     }
 }

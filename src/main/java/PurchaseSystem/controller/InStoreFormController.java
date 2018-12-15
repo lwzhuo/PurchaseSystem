@@ -1,5 +1,6 @@
 package PurchaseSystem.controller;
 
+import PurchaseSystem.model.Goods.DetailItem;
 import PurchaseSystem.model.Store.InStoreForm;
 import PurchaseSystem.service.IinStoreFormService;
 import PurchaseSystem.util.returnJson;
@@ -17,9 +18,9 @@ public class InStoreFormController {
     @PostMapping(value = "/insert",consumes = "application/json",produces = "application/json")
     public @ResponseBody
     String addInStoreForm(@RequestBody InStoreForm form){
-        int num = inStoreFormService.addISF(form);
+        long num = inStoreFormService.addISF(form);
         if(num<0) return returnJson.returnError();
-        else return returnJson.returnOK();
+        else return returnJson.returnOKWithExtraData("formId",num);
     }
 
     @GetMapping(value = "/delete")
@@ -61,5 +62,22 @@ public class InStoreFormController {
     @GetMapping(value = "/detail/get",produces = "application/json")
     public @ResponseBody HashMap getInStoreFormDetail(@RequestParam int id){
         return (HashMap) inStoreFormService.getISFDetailById(id);
+    }
+
+    @PostMapping(value = "/detail/insert",consumes = "application/json",produces = "application/json")
+    public @ResponseBody String insertDetailItem(@RequestBody HashMap hashMap){
+        int formid = (int)hashMap.get("formId");
+        List<DetailItem> detailItems = (List<DetailItem>)hashMap.get("detailList");
+        int num = inStoreFormService.addISFDetailItem(formid,detailItems);
+        if(num<0) return returnJson.returnError();
+        else return returnJson.returnOK();
+    }
+    @PostMapping(value = "/detail/delete",consumes = "application/json",produces = "application/json")
+    public @ResponseBody String deleteDetailItem(@RequestBody HashMap hashMap){
+        int formid = (int)hashMap.get("formId");
+        List<Integer> detailItems = (List<Integer>)hashMap.get("deleteList");
+        int num = inStoreFormService.deleteISFDetailItem(detailItems);
+        if(num<0) return returnJson.returnError();
+        else return returnJson.returnOK();
     }
 }

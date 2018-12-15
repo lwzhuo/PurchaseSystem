@@ -3,6 +3,7 @@ package PurchaseSystem.service.implement.form;
 import PurchaseSystem.dao.Form.FormDao;
 import PurchaseSystem.dao.Form.FormDetailDao;
 import PurchaseSystem.model.Form.form;
+import PurchaseSystem.model.Goods.DetailItem;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import java.util.HashMap;
@@ -17,12 +18,15 @@ public abstract class abstractFormImpl {
     public abstract void setFormDao(FormDao formDao);
     public abstract void setFdDao(FormDetailDao fdDao);
     public abstract void setTablename(String tablename);
-    public int addForm(form f){
-        int num=0;
+    //新增一个表
+    public long addForm(form f){
+        long num=0;
         try {
             List detailList = f.getDetailList();
             formDao.insertForm(f);
             fdDao.insertDetail(tablename,detailList,f.getId());
+            num = f.getId();
+            System.out.println(num);
         }catch (Exception e){
             e.printStackTrace();
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();//手动执行回滚
@@ -30,7 +34,19 @@ public abstract class abstractFormImpl {
         }
         return num;
     }
-
+    //给某一个表增加一条或者多条detail项目
+    public int addFormDetailItem(int formid,List<DetailItem> detailList){
+        int num=0;
+        try{
+            fdDao.insertDetail(tablename,detailList,formid);
+        }catch (Exception e){
+            e.printStackTrace();
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();//手动执行回滚
+            num=-1;
+        }
+        return num;
+    }
+    //删除一个form
     public int deleteForm(int id){
         int num=0;
         try {
@@ -43,7 +59,7 @@ public abstract class abstractFormImpl {
         }
         return num;
     }
-
+    //批量删除form
     public int deleteFormBatch(List<Integer> deleteList){
         int num=0;
         try {
@@ -58,7 +74,21 @@ public abstract class abstractFormImpl {
         }
         return num;
     }
-
+    //删除某一个表的detailitem表项
+    public int deleteFormDetailItem(List<Integer> deleteList){
+        int num=0;
+        try {
+            for(int id:deleteList){
+                fdDao.deleteDetailItem(tablename,id);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            num=-1;
+        }
+        return num;
+    }
+    //更新表
     public int updateForm(form f){
         int num=0;
         try {
@@ -72,7 +102,7 @@ public abstract class abstractFormImpl {
         }
         return num;
     }
-
+    //批量更新表
     public int updateFormBatch(List<? extends form> fList){
         int num=0;
         try {
@@ -90,14 +120,15 @@ public abstract class abstractFormImpl {
         }
         return num;
     }
+    //获得表的简略信息 不含detail项
     public HashMap getBriefFormBatch(int base, int offset){//没有详细的具体货物信息，只是摘要
         HashMap map = new HashMap();
         List list = formDao.selectFormBatch(base,offset);
-        map.put("formList",list);
         map.put("batchNum",list.size());
+        map.put("formList",list);
         return map;
     }
-
+    //获得某一个表的对应detail项
     public HashMap getFormDetailById(int id){//获得某一需求计划单的详情货物信息
         HashMap map = new HashMap();
         List list = fdDao.selectDetailByFormId(tablename,id);
@@ -106,6 +137,7 @@ public abstract class abstractFormImpl {
         map.put("formId",id);
         return map;
     }
+    //获得表的记录的数量
     public int getCount(){
         return formDao.getCount();
     }

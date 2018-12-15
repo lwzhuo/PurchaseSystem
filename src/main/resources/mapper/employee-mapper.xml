@@ -4,9 +4,28 @@
 <mapper namespace="PurchaseSystem.dao.employeeDao">
 
     <select id="selectEmployee" resultType="Employee" parameterType="long">
-        SELECT id,name,address,phone,apartment_id AS apartment FROM employee WHERE id = #{id}
+        SELECT id,name,address,phone,password,apartment_id AS apartment FROM employee WHERE id = #{id}
     </select>
+
     <select id="getEmployeeNameById" resultType="String" parameterType="int">
         SELECT name FROM employee WHERE id=#{id}
     </select>
+
+    <select id="getEmployeePassword" resultType="String" parameterType="long">
+        SELECT password FROM purchase.employee WHERE id=#{id}
+    </select>
+
+    <select id="getEmployeeRole" resultType="String">
+        SELECT role_name FROM employee_role,role WHERE employee_role.role_id=role.role_id AND employee_role.employee_id=#{id}
+    </select>
+
+    <select id="getPermissionByRole" resultType="String">
+        SELECT permission.permission_name FROM
+        permission,role_permission,role
+        WHERE
+        permission.permission_id=role_permission.permission_id
+        AND role.role_id=role_permission.role_id
+        AND role_name=#{role}
+    </select>
+
 </mapper>

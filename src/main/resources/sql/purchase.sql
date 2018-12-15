@@ -8,7 +8,7 @@ CREATE TABLE apartment(
     )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 -- 员工表
 CREATE TABLE employee(
-	`id` INT NOT NULL auto_increment,
+	`id` INT NOT NULL,
     `name` VARCHAR(40) NOT NULL,
     `password` VARCHAR(40) NOT NULL,
 	`address` VARCHAR(100) NOT NULL,
@@ -25,6 +25,12 @@ CREATE TABLE supplier(
     `supplier_phone` BIGINT NOT NULL,
     PRIMARY KEY(`supplier_id`)
     )ENGINE=InnoDB DEFAULT CHARSET=utf8;
+-- 商品类别表
+CREATE TABLE goods_type(
+  `id` INT NOT NULL auto_increment,
+  `type_name` VARCHAR(20) NOT NULL,
+  PRIMARY KEY(`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 -- 商品表
 CREATE TABLE goods(
 	`id` INT NOT NULL auto_increment,
@@ -36,12 +42,6 @@ CREATE TABLE goods(
     FOREIGN KEY (supplier_id) REFERENCES supplier(supplier_id),
     FOREIGN KEY (goods_type_id) REFERENCES goods_type(id)
     )ENGINE=InnoDB DEFAULT CHARSET=utf8;
--- 商品类别表
-CREATE TABLE goods_type(
-  `id` INT NOT NULL auto_increment,
-  `type_name` VARCHAR(20) NOT NULL,
-  PRIMARY KEY(`id`)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 -- 需求计划单表
 CREATE TABLE needplan_form(
 	`id` BIGINT NOT NULL auto_increment,
@@ -193,3 +193,37 @@ CREATE TABLE `instoreform_detail`  (
     FOREIGN KEY(form_id) REFERENCES instore_form(id),
     FOREIGN KEY(goods_id) REFERENCES goods(id)
 	)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+    
+-- 权限认证模块
+
+-- 角色表
+CREATE TABLE `role`(
+	`role_id` INT NOT NULL,
+    `role_name` VARCHAR(30) NOT NULL,
+    `description` VARCHAR(100) NOT NULL,
+    PRIMARY KEY(`role_id`)
+    )ENGINE=InnoDB DEFAULT CHARSET=utf8;
+    
+-- 权限表
+CREATE TABLE `permission`(
+	`permission_id` INT NOT NULL,
+    `permission_name` VARCHAR(30) NOT NULL,
+    `description` VARCHAR(100) NOT NULL,
+    PRIMARY KEY(`permission_id`)
+    )ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- 用户-角色表
+CREATE TABLE `employee_role`(
+	`employee_id` INT NOT NULL,
+    `role_id` INT NOT NULL,
+    FOREIGN KEY(employee_id) REFERENCES employee(id),
+    FOREIGN KEY(role_id) REFERENCES role(role_id)
+    )ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- 角色-权限表
+CREATE TABLE `role_permission`(
+	`role_id` INT NOT NULL,
+    `permission_id` INT NOT NULL,
+    FOREIGN KEY(role_id) REFERENCES role(role_id),
+    FOREIGN KEY(permission_id) REFERENCES permission(permission_id)
+    )ENGINE=InnoDB DEFAULT CHARSET=utf8;
