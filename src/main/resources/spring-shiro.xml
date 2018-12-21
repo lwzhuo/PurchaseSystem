@@ -4,39 +4,51 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    <!--配置重写的role过滤器-->
+    <bean id="anyRoles" class="PurchaseSystem.service.implement.shiro.MyRolesAuthorizationFilter"></bean>
+
+    <!--配置重写的permission过滤器-->
+    <bean id="anyPerms" class="PurchaseSystem.service.implement.shiro.MyPermissionsAuthorizationFilter"></bean>
+
     <!--配置过滤链-->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
         <property name="loginUrl" value="/employee/login"/>
+        <property name="unauthorizedUrl" value="/employee/unauthorized"></property>
         <property name="filterChainDefinitions">
             <value>
                 /employee/login=anon
-                /** = authc
+                /employee/logout=authc
+
+
+                /needplanform/getlist=anyPerms[needplanform_select_all,needplanform_select_own]
+                /needplanform/detail/get=anyPerms[needplanform_select_all,needplanform_select_own]
+                /needplanform/** = anyRoles[admin,demander_default,demander_admin,purchase_apartment_default,purchase_apartment_admin]
+
+
+                /purchaseplanform/getlist = anyPerms[purchaseplanform_select]
+                /purchaseplanform/detail/get=anyPerms[purchaseplanform_select]
+                /purchaseplanform/**=anyRoles[admin,purchase_apartment_default,purchase_apartment_admin]
+
+                /orderform/getlist=anyPerms[orderform_select]
+                /orderform/detail/get=anyPerms[orderform_select]
+                /orderform/**=anyRoles[admin,purchase_apartment_default,purchase_apartment_admin]
+
+                /receiptform/getlist=anyPerms[receiptform_select]
+                /receiptform/detail/get=anyPerms[receiptform_select]
+                /receiptform/**=anyRoles[admin,purchase_apartment_default,purchase_apartment_admin]
+
+
+                /instoreform/getlist=anyPerms[instoreform_select]
+                /instoreform/detail/get=anyPerms[instoreform_select]
+                /instoreform/**=anyRoles[admin,store_keeper_default,store_keeper_admin]
+
+                /outstoreform/getlist=anyPerms[outstoreform_select]
+                /outstoreform/detail/get=anyPerms[outstoreform_select]
+                /outstoreform/**=anyRoles[admin,store_keeper_default,store_keeper_admin]
+                /** = roles[admin]
             </value>
         </property>
-
-        <!-- override these for application-specific URLs if you like:
-        <property name="loginUrl" value="/login.jsp"/>
-        <property name="successUrl" value="/home.jsp"/>
-        <property name="unauthorizedUrl" value="/unauthorized.jsp"/> -->
-        <!-- The 'filters' property is not necessary since any declared javax.servlet.Filter bean  -->
-        <!-- defined will be automatically acquired and available via its beanName in chain        -->
-        <!-- definitions, but you can perform instance overrides or name aliases here if you like: -->
-        <!-- <property name="filters">
-            <util:map>
-                <entry key="anAlias" value-ref="someFilter"/>
-            </util:map>
-        </property> -->
-
-        <!--<property name="filterChainDefinitions">-->
-            <!--<value>-->
-                <!--# some example chain definitions:-->
-                <!--/admin/** = authc, roles[admin]-->
-                <!--/docs/** = authc, perms[document:read]-->
-                <!--/** = authc-->
-                <!--# more URL-to-FilterChain definitions here-->
-            <!--</value>-->
-        <!--</property>-->
     </bean>
 
     <!--配置securityManager-->
@@ -47,7 +59,7 @@
     <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
 
     <!--配置realm-->
-    <bean id="myRealm" class="PurchaseSystem.service.implement.SystemAuthorizingRealm"/>
+    <bean id="myRealm" class="PurchaseSystem.service.implement.shiro.SystemAuthorizingRealm"/>
 
     <!--开启shiro注解-->
     <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor"/>

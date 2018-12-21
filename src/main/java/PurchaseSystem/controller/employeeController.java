@@ -2,6 +2,7 @@ package PurchaseSystem.controller;
 
 import PurchaseSystem.model.Role.Employee;
 import PurchaseSystem.service.IEmployeeService;
+import PurchaseSystem.util.returnJson;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
@@ -32,7 +33,9 @@ public class employeeController {
         HashMap result = new HashMap();
         try {
             subject.login(token);
+            Employee employee = employeeService.selectEmployee(Long.parseLong(employeeId));
             result.put("employeeId",employeeId);
+            result.put("employeeName",employee.getName());
             result.put("status","success");
         }catch (IncorrectCredentialsException e) {
             System.out.println("登录密码错误. Password for account " + token.getPrincipal() + " was incorrect.");
@@ -56,5 +59,9 @@ public class employeeController {
         Subject subject = SecurityUtils.getSubject();
         if(subject.isAuthenticated())
             subject.logout();
+    }
+    @RequestMapping(value = "/unauthorized")//未授权页面
+    public @ResponseBody String unauthorizedInfo(){
+        return returnJson.returnMsgandStatus(401,"unauthorized");
     }
 }
