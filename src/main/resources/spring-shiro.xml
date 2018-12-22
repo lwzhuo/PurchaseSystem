@@ -18,6 +18,7 @@
         <property name="filterChainDefinitions">
             <value>
                 /employee/login=anon
+                /employee/unauthorized=anon
                 /employee/logout=authc
 
 
