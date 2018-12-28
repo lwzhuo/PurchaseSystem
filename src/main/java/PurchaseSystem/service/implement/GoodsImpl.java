@@ -1,6 +1,6 @@
 package PurchaseSystem.service.implement;
 
-import PurchaseSystem.dao.goodsDao;
+import PurchaseSystem.dao.GoodsDao;
 import PurchaseSystem.model.Goods.Goods;
 import PurchaseSystem.service.IGoodsService;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ import org.apache.log4j.Logger;
 @Service
 public class GoodsImpl implements IGoodsService {
     @Resource
-    private goodsDao goodsDao;
+    private GoodsDao goodsDao;
     private Logger logger = Logger.getLogger(GoodsImpl.class);
     public int insertGoods(Goods goods){
         int num=0;

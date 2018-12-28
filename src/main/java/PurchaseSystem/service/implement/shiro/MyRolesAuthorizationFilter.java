@@ -10,9 +10,6 @@ import org.apache.shiro.util.CollectionUtils;
 import org.apache.shiro.web.filter.authz.AuthorizationFilter;
 
 public class MyRolesAuthorizationFilter extends AuthorizationFilter {
-
-    //TODO - complete JavaDoc
-
     @SuppressWarnings({"unchecked"})
     public boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) throws IOException {
 

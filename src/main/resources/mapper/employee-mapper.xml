@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="PurchaseSystem.dao.employeeDao">
+<mapper namespace="PurchaseSystem.dao.EmployeeDao">
 
     <select id="selectEmployee" resultType="Employee" parameterType="long">
         SELECT id,name,address,phone,password,apartment_id AS apartment FROM employee WHERE id = #{id}

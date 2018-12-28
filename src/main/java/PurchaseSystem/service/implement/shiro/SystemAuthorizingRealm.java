@@ -1,6 +1,6 @@
 package PurchaseSystem.service.implement.shiro;
 
-import PurchaseSystem.dao.employeeDao;
+import PurchaseSystem.dao.EmployeeDao;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -18,7 +18,7 @@ import java.util.List;
 @Service
 public class SystemAuthorizingRealm extends AuthorizingRealm {
     @Autowired
-    private employeeDao employeeDao;
+    private EmployeeDao employeeDao;
     //授权
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals){
         String employeeId = (String)principals.getPrimaryPrincipal();

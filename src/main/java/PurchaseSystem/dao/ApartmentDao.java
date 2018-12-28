@@ -1,5 +1,5 @@
 package PurchaseSystem.dao;
 
-public interface apartmentDao {
+public interface ApartmentDao {
     public String getApartmentNameById(int id);
 }

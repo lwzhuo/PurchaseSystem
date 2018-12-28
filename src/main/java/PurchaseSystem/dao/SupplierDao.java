@@ -1,6 +1,6 @@
 package PurchaseSystem.dao;
 
-public interface supplierDao {
+public interface SupplierDao {
     public String selectSupplierNameById(int id);
 
 }

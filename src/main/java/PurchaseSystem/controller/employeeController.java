@@ -3,6 +3,7 @@ package PurchaseSystem.controller;
 import PurchaseSystem.model.Role.Employee;
 import PurchaseSystem.service.IEmployeeService;
 import PurchaseSystem.util.returnJson;
+import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
@@ -12,16 +13,16 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.util.HashMap;
 
+
 @Controller
 @RequestMapping("/employee")
 public class employeeController {
     @Resource
     private IEmployeeService employeeService;
-
-    @RequestMapping(value = "/{id}",method = RequestMethod.GET,produces = "application/json")
+    private static Logger logger = Logger.getLogger(employeeController.class);
+    @GetMapping(value = "/{id}",produces = "application/json")
     public @ResponseBody Employee selectEmployee(@PathVariable("id") long id){
-        Employee employee = employeeService.selectEmployee(id);
-        return employee;
+        return employeeService.selectEmployee(id);
     }
 
     @RequestMapping(value = "/login")
@@ -38,19 +39,25 @@ public class employeeController {
             result.put("employeeName",employee.getName());
             result.put("status","success");
         }catch (IncorrectCredentialsException e) {
-            System.out.println("登录密码错误. Password for account " + token.getPrincipal() + " was incorrect.");
+            String log = "登录密码错误. Password for account " + token.getPrincipal() + " was incorrect.";
+            logger.info(log);
             result.put("employeeId",employeeId);
             result.put("status","fail");
         } catch (ExcessiveAttemptsException e) {
-            System.out.println("登录失败次数过多");
+            String log = "登录失败次数过多";
+            logger.info(log);
         } catch (LockedAccountException e) {
-            System.out.println("帐号已被锁定. The account for username " + token.getPrincipal() + " was locked.");
+            String log = "帐号已被锁定. The account for username " + token.getPrincipal() + " was locked.";
+            logger.info(log);
         } catch (DisabledAccountException e) {
-            System.out.println("帐号已被禁用. The account for username " + token.getPrincipal() + " was disabled.");
+            String log = "帐号已被禁用. The account for username " + token.getPrincipal() + " was disabled.";
+            logger.info(log);
         } catch (ExpiredCredentialsException e) {
-            System.out.println("帐号已过期. the account for username " + token.getPrincipal() + "  was expired.");
+            String log = "帐号已过期. the account for username " + token.getPrincipal() + "  was expired.";
+            logger.info(log);
         } catch (UnknownAccountException e) {
-            System.out.println("帐号不存在. There is no user with username of " + token.getPrincipal());
+            String log = "帐号不存在. There is no user with username of " + token.getPrincipal();
+            logger.info(log);
         }
         return result;
     }
