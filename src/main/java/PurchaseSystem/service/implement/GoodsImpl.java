@@ -12,18 +12,20 @@ import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import org.apache.log4j.Logger;
 
 @Service
 public class GoodsImpl implements IGoodsService {
     @Resource
     private goodsDao goodsDao;
-
+    private Logger logger = Logger.getLogger(GoodsImpl.class);
     public int insertGoods(Goods goods){
         int num=0;
         try {
             num = this.goodsDao.insertGoods(goods);
         }catch (Exception e){
-            e.printStackTrace();
+            logger.error(e);
+            logger.info(e);
         }
         return num;
     }
@@ -33,7 +35,8 @@ public class GoodsImpl implements IGoodsService {
         try{
             this.goodsDao.deleteGoods(id);
         }catch (Exception e){
-            e.printStackTrace();
+            logger.error(e);
+            logger.info(e);
             num = -1;
         }
         return num;
@@ -46,7 +49,8 @@ public class GoodsImpl implements IGoodsService {
             while (it.hasNext())
                 this.goodsDao.deleteGoods((int)it.next());
         }catch (Exception e){
-            e.printStackTrace();
+            logger.error(e);
+            logger.info(e);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             num=-1;
         }

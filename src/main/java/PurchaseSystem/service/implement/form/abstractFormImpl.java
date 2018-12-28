@@ -4,6 +4,7 @@ import PurchaseSystem.dao.Form.FormDao;
 import PurchaseSystem.dao.Form.FormDetailDao;
 import PurchaseSystem.model.Form.form;
 import PurchaseSystem.model.Goods.DetailItem;
+import org.apache.log4j.Logger;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import java.util.HashMap;
@@ -14,7 +15,7 @@ public abstract class abstractFormImpl {
     protected FormDetailDao fdDao;
     protected FormDao formDao;
     protected String tablename;
-
+    private static Logger logger = Logger.getLogger(abstractFormImpl.class);
     public abstract void setFormDao(FormDao formDao);
     public abstract void setFdDao(FormDetailDao fdDao);
     public abstract void setTablename(String tablename);
@@ -28,7 +29,8 @@ public abstract class abstractFormImpl {
             num = f.getId();
             System.out.println(num);
         }catch (Exception e){
-            e.printStackTrace();
+            logger.error(e);
+            logger.info(e);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();//手动执行回滚
             num=-1;
         }
@@ -40,7 +42,8 @@ public abstract class abstractFormImpl {
         try{
             fdDao.insertDetail(tablename,detailList,formid);
         }catch (Exception e){
-            e.printStackTrace();
+            logger.error(e);
+            logger.info(e);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();//手动执行回滚
             num=-1;
         }
@@ -53,7 +56,8 @@ public abstract class abstractFormImpl {
             fdDao.deleteDetail(tablename,id);
             formDao.deleteForm(id);
         }catch (Exception e){
-            e.printStackTrace();
+            logger.error(e);
+            logger.info(e);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             num=-1;
         }
@@ -68,7 +72,8 @@ public abstract class abstractFormImpl {
                 formDao.deleteForm(id);
             }
         }catch (Exception e){
-            e.printStackTrace();
+            logger.error(e);
+            logger.info(e);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             num=-1;
         }
@@ -82,7 +87,8 @@ public abstract class abstractFormImpl {
                 fdDao.deleteDetailItem(tablename,id);
             }
         }catch (Exception e){
-            e.printStackTrace();
+            logger.error(e);
+            logger.info(e);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             num=-1;
         }
@@ -96,7 +102,8 @@ public abstract class abstractFormImpl {
             if(f.getDetailList()!=null)
                 fdDao.updateDetail(tablename,f.getDetailList());
         }catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e);
+            logger.info(e);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             num = -1;
         }
@@ -114,7 +121,8 @@ public abstract class abstractFormImpl {
                     fdDao.updateDetail(tablename,f.getDetailList());
             }
         }catch (Exception e){
-            e.printStackTrace();
+            logger.error(e);
+            logger.info(e);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             num=-1;
         }

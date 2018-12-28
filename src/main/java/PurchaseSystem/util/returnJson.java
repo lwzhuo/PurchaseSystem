@@ -1,10 +1,12 @@
 package PurchaseSystem.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.log4j.Logger;
 
 import java.util.HashMap;
 
 public class returnJson {
+    private static Logger logger = Logger.getLogger(returnJson.class);
     public static String returnMsgandStatus(int status,String msg){
         String string="{\"status\":"+status+",\"msg\":"+"\""+msg+"\"}";
         return string;
@@ -22,7 +24,8 @@ public class returnJson {
         try {
             string = mapper.writeValueAsString(obj);
         }catch (Exception e){
-            e.printStackTrace();
+            logger.error(e);
+            logger.info(e);
         }
         return string;
     }
@@ -37,7 +40,8 @@ public class returnJson {
             hashMap.put(key,obj);
             string = mapper.writeValueAsString(hashMap);
         }catch (Exception e){
-            e.printStackTrace();
+            logger.error(e);
+            logger.info(e);
         }
         return string;
     }
