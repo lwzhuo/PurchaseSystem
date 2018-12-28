@@ -1,6 +1,6 @@
 package purchasesystem.controller;
 
-import purchasesystem.model.Goods.Goods;
+import purchasesystem.model.goods.Goods;
 import purchasesystem.service.IGoodsService;
 import purchasesystem.util.ReturnJson;
 import org.springframework.web.bind.annotation.*;

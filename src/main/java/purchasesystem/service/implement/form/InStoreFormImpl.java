@@ -2,8 +2,8 @@ package purchasesystem.service.implement.form;
 
 import purchasesystem.dao.form.FormDao;
 import purchasesystem.dao.form.FormDetailDao;
-import purchasesystem.model.Goods.DetailItem;
-import purchasesystem.model.Store.InStoreForm;
+import purchasesystem.model.goods.DetailItem;
+import purchasesystem.model.store.InStoreForm;
 import purchasesystem.service.IinStoreFormService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

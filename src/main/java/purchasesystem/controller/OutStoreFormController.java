@@ -1,7 +1,7 @@
 package purchasesystem.controller;
 
-import purchasesystem.model.Goods.DetailItem;
-import purchasesystem.model.Store.OutStoreForm;
+import purchasesystem.model.goods.DetailItem;
+import purchasesystem.model.store.OutStoreForm;
 import purchasesystem.service.IoutStoreFormService;
 import purchasesystem.util.ReturnJson;
 import org.springframework.web.bind.annotation.*;

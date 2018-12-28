@@ -10,7 +10,7 @@
         <result column="auditor_id" property="auditorId"></result>
         <result column="employee_name" property="auditor"></result>
     </resultMap>
-    <insert id="insertForm" useGeneratedKeys="true" keyProperty="id" parameterType="purchasesystem.model.Store.OutStoreForm">
+    <insert id="insertForm" useGeneratedKeys="true" keyProperty="id" parameterType="purchasesystem.model.store.OutStoreForm">
         INSERT INTO outstore_form (name, status, comment, make_date, auditor_id)
         VALUES(#{title},#{status},#{comment},#{makeDate},#{auditorId})
     </insert>
@@ -19,7 +19,7 @@
         DELETE FROM outstore_form WHERE id=#{id}
     </delete>
 
-    <update id="updateForm" parameterType="purchasesystem.model.Store.OutStoreForm">
+    <update id="updateForm" parameterType="purchasesystem.model.store.OutStoreForm">
         UPDATE outstore_form
         <trim prefix="SET" suffixOverrides=",">
             <if test="title!=null">name=#{title},</if>

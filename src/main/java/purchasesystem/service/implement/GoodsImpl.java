@@ -1,7 +1,7 @@
 package purchasesystem.service.implement;
 
 import purchasesystem.dao.GoodsDao;
-import purchasesystem.model.Goods.Goods;
+import purchasesystem.model.goods.Goods;
 import purchasesystem.service.IGoodsService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;

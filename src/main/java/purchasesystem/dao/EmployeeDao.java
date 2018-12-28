@@ -1,5 +1,5 @@
 package purchasesystem.dao;
-import purchasesystem.model.Role.Employee;
+import purchasesystem.model.role.Employee;
 
 import java.util.List;
 

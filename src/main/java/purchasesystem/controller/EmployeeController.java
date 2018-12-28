@@ -1,6 +1,6 @@
 package purchasesystem.controller;
 
-import purchasesystem.model.Role.Employee;
+import purchasesystem.model.role.Employee;
 import purchasesystem.service.IEmployeeService;
 import purchasesystem.util.ReturnJson;
 import org.apache.log4j.Logger;

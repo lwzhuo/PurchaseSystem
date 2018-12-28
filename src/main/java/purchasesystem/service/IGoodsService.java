@@ -1,6 +1,6 @@
 package purchasesystem.service;
 
-import purchasesystem.model.Goods.Goods;
+import purchasesystem.model.goods.Goods;
 
 import java.util.HashMap;
 import java.util.Iterator;

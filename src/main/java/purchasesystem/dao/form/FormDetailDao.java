@@ -1,6 +1,6 @@
 package purchasesystem.dao.form;
 
-import purchasesystem.model.Goods.DetailItem;
+import purchasesystem.model.goods.DetailItem;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

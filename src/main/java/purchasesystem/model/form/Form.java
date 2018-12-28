@@ -1,6 +1,6 @@
 package purchasesystem.model.form;
 
-import purchasesystem.model.Goods.DetailItem;
+import purchasesystem.model.goods.DetailItem;
 
 import java.sql.Timestamp;
 import java.util.List;

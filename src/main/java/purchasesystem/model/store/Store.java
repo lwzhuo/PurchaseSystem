@@ -1,4 +1,4 @@
-package purchasesystem.model.Store;
+package purchasesystem.model.store;
 
 public class Store {
     private Long goodsId;

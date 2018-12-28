@@ -1,4 +1,4 @@
-package purchasesystem.model.Role;
+package purchasesystem.model.role;
 
 public class Supplier {
     private Long id;

@@ -1,6 +1,6 @@
 package purchasesystem.dao;
 
-import purchasesystem.model.Goods.Goods;
+import purchasesystem.model.goods.Goods;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.HashMap;

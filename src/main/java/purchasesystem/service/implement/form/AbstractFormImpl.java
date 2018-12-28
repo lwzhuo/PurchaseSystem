@@ -3,7 +3,7 @@ package purchasesystem.service.implement.form;
 import purchasesystem.dao.form.FormDao;
 import purchasesystem.dao.form.FormDetailDao;
 import purchasesystem.model.form.Form;
-import purchasesystem.model.Goods.DetailItem;
+import purchasesystem.model.goods.DetailItem;
 import org.apache.log4j.Logger;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 

@@ -28,12 +28,12 @@
         LIMIT #{base},#{offset}
     </select>
 
-    <insert id="insertGoods" useGeneratedKeys="true" keyProperty="goodsId" parameterType="purchasesystem.model.Goods.Goods">
+    <insert id="insertGoods" useGeneratedKeys="true" keyProperty="goodsId" parameterType="purchasesystem.model.goods.Goods">
         INSERT INTO goods(goods_name,goods_price,supplier_id,goods_type_id)
         VALUES (#{goodsName},#{goodsPrice},#{supplierId},#{typeId})
     </insert>
 
-    <update id="updateGoods" useGeneratedKeys="true" keyProperty="goodsId" parameterType="purchasesystem.model.Goods.Goods" >
+    <update id="updateGoods" useGeneratedKeys="true" keyProperty="goodsId" parameterType="purchasesystem.model.goods.Goods" >
         UPDATE goods
         <trim prefix="SET" suffixOverrides=",">
             <if test="goodsName!=null">goods_name=#{goodsName},</if>

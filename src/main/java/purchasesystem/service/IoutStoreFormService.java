@@ -1,6 +1,6 @@
 package purchasesystem.service;
-import purchasesystem.model.Goods.DetailItem;
-import purchasesystem.model.Store.OutStoreForm;
+import purchasesystem.model.goods.DetailItem;
+import purchasesystem.model.store.OutStoreForm;
 
 import java.util.List;
 import java.util.Map;

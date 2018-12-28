@@ -1,4 +1,4 @@
-package purchasesystem.model.Goods;
+package purchasesystem.model.goods;
 
 public class DetailItem {
     private Long detailItemId;
