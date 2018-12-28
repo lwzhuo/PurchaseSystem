@@ -46,11 +46,11 @@
       <version>4.12</version>
     </dependency>
 
-    <!-- 实现slf4j接口并整合 -->
+    <!-- 实现slf4j接口并整合 使用log4j-->
     <dependency>
-      <groupId>ch.qos.logback</groupId>
-      <artifactId>logback-classic</artifactId>
-      <version>1.2.2</version>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>1.2.17</version>
     </dependency>
 
     <!-- JSON -->
@@ -151,6 +151,12 @@
       <groupId>org.apache.shiro</groupId>
       <artifactId>shiro-spring</artifactId>
       <version>1.2.3</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.tomcat</groupId>
+      <artifactId>tomcat-catalina</artifactId>
+      <version>8.5.34</version>
+      <scope>provided</scope>
     </dependency>
   </dependencies>
 

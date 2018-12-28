@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="PurchaseSystem.dao.Form.inStoreFormDao">
+<mapper namespace="purchasesystem.dao.form.InStoreFormDao">
     <resultMap id="ISFormMap" type="java.util.HashMap">
         <id column="fid" property="formid"></id>
         <result column="name" property="title"></result>
@@ -11,7 +11,7 @@
         <result column="employee_name" property="auditor"></result>
         <result column="receipt_id" property="receiptId"></result>
     </resultMap>
-    <insert id="insertForm" useGeneratedKeys="true" keyProperty="id" parameterType="PurchaseSystem.model.Store.InStoreForm">
+    <insert id="insertForm" useGeneratedKeys="true" keyProperty="id" parameterType="purchasesystem.model.store.InStoreForm">
         INSERT INTO instore_form (name, status, comment, make_date, auditor_id, receipt_id)
         VALUES(#{title},#{status},#{comment},#{makeDate},#{auditorId},#{receiptId})
     </insert>
@@ -20,7 +20,7 @@
         DELETE FROM instore_form WHERE id=#{id}
     </delete>
 
-    <update id="updateForm" parameterType="PurchaseSystem.model.Store.InStoreForm">
+    <update id="updateForm" parameterType="purchasesystem.model.store.InStoreForm">
         UPDATE instore_form
         <trim prefix="SET" suffixOverrides=",">
             <if test="title!=null">name=#{title},</if>
