@@ -5,10 +5,10 @@
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
     <!--配置重写的role过滤器-->
-    <bean id="anyRoles" class="PurchaseSystem.service.implement.shiro.MyRolesAuthorizationFilter"></bean>
+    <bean id="anyRoles" class="purchasesystem.service.implement.shiro.MyRolesAuthorizationFilter"></bean>
 
     <!--配置重写的permission过滤器-->
-    <bean id="anyPerms" class="PurchaseSystem.service.implement.shiro.MyPermissionsAuthorizationFilter"></bean>
+    <bean id="anyPerms" class="purchasesystem.service.implement.shiro.MyPermissionsAuthorizationFilter"></bean>
 
     <!--配置过滤链-->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
@@ -60,7 +60,7 @@
     <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
 
     <!--配置realm-->
-    <bean id="myRealm" class="PurchaseSystem.service.implement.shiro.SystemAuthorizingRealm"/>
+    <bean id="myRealm" class="purchasesystem.service.implement.shiro.SystemAuthorizingRealm"/>
 
     <!--开启shiro注解-->
     <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor"/>

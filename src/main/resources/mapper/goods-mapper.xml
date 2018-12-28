@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="PurchaseSystem.dao.GoodsDao">
+<mapper namespace="purchasesystem.dao.GoodsDao">
     <resultMap id="GoodsResultMap" type="java.util.HashMap">
         <id column="goods_id" property="goodsId"></id>
         <result column="goods_name" property="goodsName"></result>
@@ -10,7 +10,7 @@
         <result column="goods_type_id" property="typeId"></result>
         <result column="type_name" property="typeName"></result>
         <association column="supplier_id" property="supplierName"
-                     select="PurchaseSystem.dao.SupplierDao.selectSupplierNameById"></association>
+                     select="purchasesystem.dao.SupplierDao.selectSupplierNameById"></association>
     </resultMap>
 
     <select id="selectGoodsById" resultMap="GoodsResultMap" parameterType="int">
@@ -28,12 +28,12 @@
         LIMIT #{base},#{offset}
     </select>
 
-    <insert id="insertGoods" useGeneratedKeys="true" keyProperty="goodsId" parameterType="PurchaseSystem.model.Goods.Goods">
+    <insert id="insertGoods" useGeneratedKeys="true" keyProperty="goodsId" parameterType="purchasesystem.model.Goods.Goods">
         INSERT INTO goods(goods_name,goods_price,supplier_id,goods_type_id)
         VALUES (#{goodsName},#{goodsPrice},#{supplierId},#{typeId})
     </insert>
 
-    <update id="updateGoods" useGeneratedKeys="true" keyProperty="goodsId" parameterType="PurchaseSystem.model.Goods.Goods" >
+    <update id="updateGoods" useGeneratedKeys="true" keyProperty="goodsId" parameterType="purchasesystem.model.Goods.Goods" >
         UPDATE goods
         <trim prefix="SET" suffixOverrides=",">
             <if test="goodsName!=null">goods_name=#{goodsName},</if>

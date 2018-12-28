@@ -5,7 +5,7 @@
     且每个detail的操作基本一致
     故此mapper文件是各种form表对应的detail表的通用mapper
     对于要操作特定的detail表，则需要多传入一个表名的字符串参数-->
-<mapper namespace="PurchaseSystem.dao.Form.FormDetailDao">
+<mapper namespace="purchasesystem.dao.Form.FormDetailDao">
     <resultMap id="FormDetailMap" type="java.util.HashMap">
         <id column="Formd_id" property="detailItemId"></id>
         <result column="form_id" property="formId"></result>
