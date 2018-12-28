@@ -2,7 +2,7 @@ package purchasesystem.model.Form;
 
 import java.sql.Timestamp;
 
-public class NeedPlanForm extends form {
+public class NeedPlanForm extends Form {
     private Timestamp receiveDate;
     private Long makerId;
     private Integer apartment;

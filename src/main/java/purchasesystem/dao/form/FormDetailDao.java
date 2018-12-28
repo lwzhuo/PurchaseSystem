@@ -1,4 +1,4 @@
-package purchasesystem.dao.Form;
+package purchasesystem.dao.form;
 
 import purchasesystem.model.Goods.DetailItem;
 import org.apache.ibatis.annotations.Param;

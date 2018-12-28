@@ -2,7 +2,7 @@ package purchasesystem.model.Form;
 
 import java.sql.Timestamp;
 
-public class ReceiptForm extends form {
+public class ReceiptForm extends Form {
     private Long orderId;
     private Long auditorId;
     private Timestamp receiveDate;

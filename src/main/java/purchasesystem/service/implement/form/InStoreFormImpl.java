@@ -1,7 +1,7 @@
 package purchasesystem.service.implement.form;
 
-import purchasesystem.dao.Form.FormDao;
-import purchasesystem.dao.Form.FormDetailDao;
+import purchasesystem.dao.form.FormDao;
+import purchasesystem.dao.form.FormDetailDao;
 import purchasesystem.model.Goods.DetailItem;
 import purchasesystem.model.Store.InStoreForm;
 import purchasesystem.service.IinStoreFormService;
@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service("inStoreFormService")
-public class inStoreFormImpl extends abstractFormImpl implements IinStoreFormService {
+public class InStoreFormImpl extends AbstractFormImpl implements IinStoreFormService {
     @Resource(name = "inStoreFormDao")
     public void setFormDao(FormDao formDao){
         this.formDao = formDao;

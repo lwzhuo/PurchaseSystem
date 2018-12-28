@@ -5,7 +5,7 @@ import purchasesystem.model.Goods.DetailItem;
 import java.sql.Timestamp;
 import java.util.List;
 
-public class form {
+public class Form {
     private Long id;
     private String title;
     private Integer status;

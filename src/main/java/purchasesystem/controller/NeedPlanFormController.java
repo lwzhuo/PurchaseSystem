@@ -3,7 +3,7 @@ package purchasesystem.controller;
 import purchasesystem.model.Form.NeedPlanForm;
 import purchasesystem.model.Goods.DetailItem;
 import purchasesystem.service.IneedPlanFormService;
-import purchasesystem.util.returnJson;
+import purchasesystem.util.ReturnJson;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -18,39 +18,39 @@ public class NeedPlanFormController {
     @PostMapping(value = "/insert",consumes = "application/json",produces = "application/json")
     public @ResponseBody String addNeedPlanForm(@RequestBody NeedPlanForm form){
         long num = needPlanFormService.addNPF(form);
-        if(num<0) return returnJson.returnError();
-        else return returnJson.returnOKWithExtraData("formId",num);//返回刚刚添加的表的id
+        if(num<0) return ReturnJson.returnError();
+        else return ReturnJson.returnOKWithExtraData("formId",num);//返回刚刚添加的表的id
     }
 
     @GetMapping(value = "/delete")
     public @ResponseBody String deleteNeedPlanForm(@RequestParam int id){
         int num = needPlanFormService.deleteNPF(id);
-        if(num<0) return returnJson.returnError();
-        else return returnJson.returnOK();
+        if(num<0) return ReturnJson.returnError();
+        else return ReturnJson.returnOK();
     }
 
     @PostMapping(value = "deletebatch",consumes = "application/json",produces = "application/json")
     public @ResponseBody String deleteNeedPlanFormBatch(@RequestBody HashMap hashMap){
         List deleteList = (List)hashMap.get("deleteList");
         int num = needPlanFormService.deleteNPFBatch(deleteList);
-        if(num<0) return returnJson.returnError();
-        else return returnJson.returnOK();
+        if(num<0) return ReturnJson.returnError();
+        else return ReturnJson.returnOK();
     }
 
     @PostMapping(value = "update",consumes = "application/json",produces = "application/json")
     public @ResponseBody String updateNeedPlanForm(@RequestBody HashMap<String,NeedPlanForm> hashMap){
-        NeedPlanForm npf = hashMap.get("form");
+        NeedPlanForm npf = hashMap.get("Form");
         int num = needPlanFormService.updateNPF(npf);
-        if(num<0) return returnJson.returnError();
-        else return returnJson.returnOK();
+        if(num<0) return ReturnJson.returnError();
+        else return ReturnJson.returnOK();
     }
 
     @PostMapping(value = "updatebatch",consumes = "application/json",produces = "application/json")
     public @ResponseBody String updateNeedPlanFormBatch(@RequestBody HashMap<String,List<NeedPlanForm>> hashMap){
         List<NeedPlanForm> formlist = hashMap.get("formlist");
         int num = needPlanFormService.updateNPFBatch(formlist);
-        if(num<0) return returnJson.returnError();
-        else return returnJson.returnOK();
+        if(num<0) return ReturnJson.returnError();
+        else return ReturnJson.returnOK();
     }
     @GetMapping(value = "/getlist",produces = "application/json")
     public @ResponseBody HashMap getNeedPlanFormBatch(@RequestParam int base,@RequestParam int offset){
@@ -67,14 +67,14 @@ public class NeedPlanFormController {
         int formid = (int)hashMap.get("formId");
         List<DetailItem> detailItems = (List<DetailItem>)hashMap.get("detailList");
         int num = needPlanFormService.addNPFDetailItem(formid,detailItems);
-        if(num<0) return returnJson.returnError();
-        else return returnJson.returnOK();
+        if(num<0) return ReturnJson.returnError();
+        else return ReturnJson.returnOK();
     }
     @PostMapping(value = "/detail/delete",consumes = "application/json",produces = "application/json")
     public @ResponseBody String deleteDetailItem(@RequestBody HashMap hashMap){
         List<Integer> detailItems = (List<Integer>)hashMap.get("deleteList");
         int num = needPlanFormService.deleteNPFDetailItem(detailItems);
-        if(num<0) return returnJson.returnError();
-        else return returnJson.returnOK();
+        if(num<0) return ReturnJson.returnError();
+        else return ReturnJson.returnOK();
     }
 }

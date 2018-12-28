@@ -1,10 +1,10 @@
 package purchasesystem.service.implement.form;
 
-import purchasesystem.dao.Form.FormDao;
-import purchasesystem.dao.Form.FormDetailDao;
-import purchasesystem.model.Form.OrderForm;
+import purchasesystem.dao.form.FormDao;
+import purchasesystem.dao.form.FormDetailDao;
+import purchasesystem.model.Form.PurchasePlanForm;
 import purchasesystem.model.Goods.DetailItem;
-import purchasesystem.service.IorderFormService;
+import purchasesystem.service.IpurchasePlanFormService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -14,14 +14,14 @@ import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
-@Service("orderFormService")
-public class orderFormImpl extends abstractFormImpl implements IorderFormService {
-    @Resource(name = "orderFormDao")
+@Service("purchasePlanService")
+public class PurchasePlanFormImpl extends AbstractFormImpl implements IpurchasePlanFormService {
+    @Resource(name = "purchasePlanFormDao")
     public void setFormDao(FormDao formDao){
         this.formDao = formDao;
     }
 
-    @Value("orderform_detail")
+    @Value("purchaseplan_detail")
     public void setTablename(String tablename){
         this.tablename = tablename;
     }
@@ -32,45 +32,45 @@ public class orderFormImpl extends abstractFormImpl implements IorderFormService
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public long addOF(OrderForm form){
+    public long addPPF(PurchasePlanForm form){
         return addForm(form);
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public int deleteOF(int id){
+    public int deletePPF(int id){
         return deleteForm(id);
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public int deleteOFBatch(List<Integer> deleteList){
+    public int deletePPFBatch(List<Integer> deleteList){
         return deleteFormBatch(deleteList);
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public int updateOF(OrderForm form){
+    public int updatePPF(PurchasePlanForm form){
         return updateForm(form);
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public int updateOFBatch(List<OrderForm> formList){
+    public int updatePPFBatch(List<PurchasePlanForm> formList){
         return updateFormBatch(formList);
     }
 
-    public Map getBriefOFBatch(int base, int offset) {//没有详细的具体货物信息，只是摘要
+    public Map getBriefPPFBatch(int base, int offset) {//没有详细的具体货物信息，只是摘要
         return getBriefFormBatch(base,offset);
     }
 
-    public Map getOFDetailById(int id){//获得某一需求计划单的详情货物信息
+    public Map getPPFDetailById(int id){//获得某一需求计划单的详情货物信息
         return getFormDetailById(id);
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public int deleteOFDetailItem(List<Integer> deleteList){
+    public int deletePPFDetailItem(List<Integer> deleteList){
         return deleteFormDetailItem(deleteList);
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public int addOFDetailItem(int formid,List<DetailItem> detailList){
+    public int addPPFDetailItem(int formid,List<DetailItem> detailList){
         return addFormDetailItem(formid,detailList);
     }
 }

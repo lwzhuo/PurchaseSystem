@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="purchasesystem.dao.Form.inStoreFormDao">
+<mapper namespace="purchasesystem.dao.form.InStoreFormDao">
     <resultMap id="ISFormMap" type="java.util.HashMap">
         <id column="fid" property="formid"></id>
         <result column="name" property="title"></result>

@@ -5,9 +5,9 @@ import org.apache.log4j.Logger;
 
 import java.util.HashMap;
 
-public class returnJson {
-    private static Logger logger = Logger.getLogger(returnJson.class);
-    private returnJson(){}
+public class ReturnJson {
+    private static Logger logger = Logger.getLogger(ReturnJson.class);
+    private ReturnJson(){}
     public static String returnMsgandStatus(int status,String msg){
         String string="{\"status\":"+status+",\"msg\":"+"\""+msg+"\"}";
         return string;

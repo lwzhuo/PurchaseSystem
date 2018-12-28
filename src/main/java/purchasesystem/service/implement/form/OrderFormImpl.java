@@ -1,10 +1,10 @@
 package purchasesystem.service.implement.form;
 
-import purchasesystem.dao.Form.FormDao;
-import purchasesystem.dao.Form.FormDetailDao;
-import purchasesystem.model.Form.ReceiptForm;
+import purchasesystem.dao.form.FormDao;
+import purchasesystem.dao.form.FormDetailDao;
+import purchasesystem.model.Form.OrderForm;
 import purchasesystem.model.Goods.DetailItem;
-import purchasesystem.service.IreceiptFormService;
+import purchasesystem.service.IorderFormService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -14,14 +14,14 @@ import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
-@Service("receiptFormService")
-public class receiptFormImpl extends abstractFormImpl implements IreceiptFormService {
-    @Resource(name = "receiptFormDao")
+@Service("orderFormService")
+public class OrderFormImpl extends AbstractFormImpl implements IorderFormService {
+    @Resource(name = "orderFormDao")
     public void setFormDao(FormDao formDao){
         this.formDao = formDao;
     }
 
-    @Value("receiptform_detail")
+    @Value("orderform_detail")
     public void setTablename(String tablename){
         this.tablename = tablename;
     }
@@ -32,45 +32,45 @@ public class receiptFormImpl extends abstractFormImpl implements IreceiptFormSer
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public long addRF(ReceiptForm form){
+    public long addOF(OrderForm form){
         return addForm(form);
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public int deleteRF(int id){
+    public int deleteOF(int id){
         return deleteForm(id);
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public int deleteRFBatch(List<Integer> deleteList){
+    public int deleteOFBatch(List<Integer> deleteList){
         return deleteFormBatch(deleteList);
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public int updateRF(ReceiptForm form){
+    public int updateOF(OrderForm form){
         return updateForm(form);
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public int updateRFBatch(List<ReceiptForm> formList){
+    public int updateOFBatch(List<OrderForm> formList){
         return updateFormBatch(formList);
     }
 
-    public Map getBriefRFBatch(int base, int offset) {//没有详细的具体货物信息，只是摘要
+    public Map getBriefOFBatch(int base, int offset) {//没有详细的具体货物信息，只是摘要
         return getBriefFormBatch(base,offset);
     }
 
-    public Map getRFDetailById(int id){//获得某一需求计划单的详情货物信息
+    public Map getOFDetailById(int id){//获得某一需求计划单的详情货物信息
         return getFormDetailById(id);
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public int deleteRFDetailItem(List<Integer> deleteList){
+    public int deleteOFDetailItem(List<Integer> deleteList){
         return deleteFormDetailItem(deleteList);
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public int addRFDetailItem(int formid,List<DetailItem> detailList){
+    public int addOFDetailItem(int formid,List<DetailItem> detailList){
         return addFormDetailItem(formid,detailList);
     }
 }

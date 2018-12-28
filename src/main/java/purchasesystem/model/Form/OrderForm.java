@@ -1,6 +1,6 @@
 package purchasesystem.model.Form;
 
-public class OrderForm extends form {
+public class OrderForm extends Form {
     private Long supplierId;
     private Float amount;
     private Long auditorId;

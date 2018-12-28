@@ -2,7 +2,7 @@ package purchasesystem.controller;
 
 import purchasesystem.model.Role.Employee;
 import purchasesystem.service.IEmployeeService;
-import purchasesystem.util.returnJson;
+import purchasesystem.util.ReturnJson;
 import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
@@ -16,10 +16,10 @@ import java.util.HashMap;
 
 @Controller
 @RequestMapping("/employee")
-public class employeeController {
+public class EmployeeController {
     @Resource
     private IEmployeeService employeeService;
-    private static Logger logger = Logger.getLogger(employeeController.class);
+    private static Logger logger = Logger.getLogger(EmployeeController.class);
     @GetMapping(value = "/{id}",produces = "application/json")
     public @ResponseBody Employee selectEmployee(@PathVariable("id") long id){
         return employeeService.selectEmployee(id);
@@ -69,6 +69,6 @@ public class employeeController {
     }
     @RequestMapping(value = "/unauthorized")//未授权页面
     public @ResponseBody String unauthorizedInfo(){
-        return returnJson.returnMsgandStatus(401,"unauthorized");
+        return ReturnJson.returnMsgandStatus(401,"unauthorized");
     }
 }

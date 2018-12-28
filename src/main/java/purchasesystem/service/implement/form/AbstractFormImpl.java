@@ -1,8 +1,8 @@
 package purchasesystem.service.implement.form;
 
-import purchasesystem.dao.Form.FormDao;
-import purchasesystem.dao.Form.FormDetailDao;
-import purchasesystem.model.Form.form;
+import purchasesystem.dao.form.FormDao;
+import purchasesystem.dao.form.FormDetailDao;
+import purchasesystem.model.Form.Form;
 import purchasesystem.model.Goods.DetailItem;
 import org.apache.log4j.Logger;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
@@ -11,16 +11,16 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-public abstract class abstractFormImpl {
+public abstract class AbstractFormImpl {
     protected FormDetailDao fdDao;
     protected FormDao formDao;
     protected String tablename;
-    private static Logger logger = Logger.getLogger(abstractFormImpl.class);
+    private static Logger logger = Logger.getLogger(AbstractFormImpl.class);
     public abstract void setFormDao(FormDao formDao);
     public abstract void setFdDao(FormDetailDao fdDao);
     public abstract void setTablename(String tablename);
     //新增一个表
-    public long addForm(form f){
+    public long addForm(Form f){
         long num=0;
         try {
             List detailList = f.getDetailList();
@@ -95,7 +95,7 @@ public abstract class abstractFormImpl {
         return num;
     }
     //更新表
-    public int updateForm(form f){
+    public int updateForm(Form f){
         int num=0;
         try {
             formDao.updateForm(f);
@@ -110,12 +110,12 @@ public abstract class abstractFormImpl {
         return num;
     }
     //批量更新表
-    public int updateFormBatch(List<? extends form> fList){
+    public int updateFormBatch(List<? extends Form> fList){
         int num=0;
         try {
-            Iterator<? extends form> it = fList.iterator();
+            Iterator<? extends Form> it = fList.iterator();
             while (it.hasNext()){
-                form f = it.next();
+                Form f = it.next();
                 formDao.updateForm(f);
                 if(f.getDetailList()!=null)
                     fdDao.updateDetail(tablename,f.getDetailList());

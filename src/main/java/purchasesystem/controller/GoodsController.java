@@ -2,7 +2,7 @@ package purchasesystem.controller;
 
 import purchasesystem.model.Goods.Goods;
 import purchasesystem.service.IGoodsService;
-import purchasesystem.util.returnJson;
+import purchasesystem.util.ReturnJson;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/goods")
-public class goodsController {
+public class GoodsController {
     @Resource
     private IGoodsService goodsService;
 
@@ -20,16 +20,16 @@ public class goodsController {
     @PostMapping(value = "/insert",consumes = "application/json",produces = "application/json")
     public String addGoods(@RequestBody Goods goods){
         int num = goodsService.insertGoods(goods);
-        if(num==1) return returnJson.returnOK();
-        else return returnJson.returnError();
+        if(num==1) return ReturnJson.returnOK();
+        else return ReturnJson.returnError();
     }
 
     //delete
     @GetMapping(value = "/delete",produces = "application/json")
     public String deleteGoods(@RequestParam int id){
         int num = goodsService.deleteGoods(id);
-        if(num==0) return returnJson.returnOK();
-        else return returnJson.returnError();
+        if(num==0) return ReturnJson.returnOK();
+        else return ReturnJson.returnError();
     }
 
     @PostMapping(value = "/deletebatch",consumes = "application/json",produces = "application/json")
@@ -38,8 +38,8 @@ public class goodsController {
         Iterator iterator = deleteList.iterator();
         hashMap.remove("deleteList");
         int num = goodsService.deleteGoodsBatch(iterator);
-        if(num==0) return returnJson.returnOK();
-        else return returnJson.returnError();
+        if(num==0) return ReturnJson.returnOK();
+        else return ReturnJson.returnError();
     }
 
     //update
@@ -48,8 +48,8 @@ public class goodsController {
         Goods goods = hashMap.get("goods");
         hashMap.remove("goods");
         int num = goodsService.updateGoods(goods);
-        if(num==1) return returnJson.returnOK();
-        else return returnJson.returnError();
+        if(num==1) return ReturnJson.returnOK();
+        else return ReturnJson.returnError();
     }
 
     @PostMapping(value = "/updatebatch",consumes = "application/json",produces = "application/json")
@@ -57,8 +57,8 @@ public class goodsController {
         List<Goods> goodsList = hashMap.get("goodsList");
         Iterator it = goodsList.iterator();
         int num = goodsService.updateGoodsBatch(it);
-        if(num==goodsList.size()) return returnJson.returnOK();
-        else return returnJson.returnError();
+        if(num==goodsList.size()) return ReturnJson.returnOK();
+        else return ReturnJson.returnError();
     }
     //select
     @GetMapping(value = "/get",produces = "application/json")

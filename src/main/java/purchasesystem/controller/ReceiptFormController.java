@@ -3,7 +3,7 @@ package purchasesystem.controller;
 import purchasesystem.model.Form.ReceiptForm;
 import purchasesystem.model.Goods.DetailItem;
 import purchasesystem.service.IreceiptFormService;
-import purchasesystem.util.returnJson;
+import purchasesystem.util.ReturnJson;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -19,39 +19,39 @@ public class ReceiptFormController {
     public @ResponseBody
     String addReceiptForm(@RequestBody ReceiptForm form){
         long num = receiptFormService.addRF(form);
-        if(num<0) return returnJson.returnError();
-        else return returnJson.returnOKWithExtraData("formId",num);
+        if(num<0) return ReturnJson.returnError();
+        else return ReturnJson.returnOKWithExtraData("formId",num);
     }
 
     @GetMapping(value = "/delete")
     public @ResponseBody String deleteReceiptForm(@RequestParam int id){
         int num = receiptFormService.deleteRF(id);
-        if(num<0) return returnJson.returnError();
-        else return returnJson.returnOK();
+        if(num<0) return ReturnJson.returnError();
+        else return ReturnJson.returnOK();
     }
 
     @PostMapping(value = "deletebatch",consumes = "application/json",produces = "application/json")
     public @ResponseBody String deleteReceiptFormBatch(@RequestBody HashMap hashMap){
         List deleteList = (List)hashMap.get("deleteList");
         int num = receiptFormService.deleteRFBatch(deleteList);
-        if(num<0) return returnJson.returnError();
-        else return returnJson.returnOK();
+        if(num<0) return ReturnJson.returnError();
+        else return ReturnJson.returnOK();
     }
 
     @PostMapping(value = "update",consumes = "application/json",produces = "application/json")
     public @ResponseBody String updateReceiptForm(@RequestBody HashMap<String,ReceiptForm> hashMap){
-        ReceiptForm form = hashMap.get("form");
+        ReceiptForm form = hashMap.get("Form");
         int num = receiptFormService.updateRF(form);
-        if(num<0) return returnJson.returnError();
-        else return returnJson.returnOK();
+        if(num<0) return ReturnJson.returnError();
+        else return ReturnJson.returnOK();
     }
 
     @PostMapping(value = "updatebatch",consumes = "application/json",produces = "application/json")
     public @ResponseBody String updateReceiptFormBatch(@RequestBody HashMap<String,List<ReceiptForm>> hashMap){
         List<ReceiptForm> formlist = hashMap.get("formlist");
         int num = receiptFormService.updateRFBatch(formlist);
-        if(num<0) return returnJson.returnError();
-        else return returnJson.returnOK();
+        if(num<0) return ReturnJson.returnError();
+        else return ReturnJson.returnOK();
     }
     @GetMapping(value = "/getlist",produces = "application/json")
     public @ResponseBody HashMap getReceiptFormBatch(@RequestParam int base,@RequestParam int offset){
@@ -68,14 +68,14 @@ public class ReceiptFormController {
         int formid = (int)hashMap.get("formId");
         List<DetailItem> detailItems = (List<DetailItem>)hashMap.get("detailList");
         int num = receiptFormService.addRFDetailItem(formid,detailItems);
-        if(num<0) return returnJson.returnError();
-        else return returnJson.returnOK();
+        if(num<0) return ReturnJson.returnError();
+        else return ReturnJson.returnOK();
     }
     @PostMapping(value = "/detail/delete",consumes = "application/json",produces = "application/json")
     public @ResponseBody String deleteDetailItem(@RequestBody HashMap hashMap){
         List<Integer> detailItems = (List<Integer>)hashMap.get("deleteList");
         int num = receiptFormService.deleteRFDetailItem(detailItems);
-        if(num<0) return returnJson.returnError();
-        else return returnJson.returnOK();
+        if(num<0) return ReturnJson.returnError();
+        else return ReturnJson.returnOK();
     }
 }

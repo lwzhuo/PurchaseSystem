@@ -1,6 +1,6 @@
 package purchasesystem.model.Form;
 
-public class PurchasePlanForm extends form {
+public class PurchasePlanForm extends Form {
     private Long makerId;
 
     public Long getMakerId() {

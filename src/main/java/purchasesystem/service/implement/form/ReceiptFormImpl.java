@@ -1,10 +1,10 @@
 package purchasesystem.service.implement.form;
 
-import purchasesystem.dao.Form.FormDao;
-import purchasesystem.dao.Form.FormDetailDao;
+import purchasesystem.dao.form.FormDao;
+import purchasesystem.dao.form.FormDetailDao;
+import purchasesystem.model.Form.ReceiptForm;
 import purchasesystem.model.Goods.DetailItem;
-import purchasesystem.model.Store.OutStoreForm;
-import purchasesystem.service.IoutStoreFormService;
+import purchasesystem.service.IreceiptFormService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -14,14 +14,14 @@ import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
-@Service("outStoreFormService")
-public class outStoreFormImpl extends abstractFormImpl implements IoutStoreFormService {
-    @Resource(name = "outStoreFormDao")
+@Service("receiptFormService")
+public class ReceiptFormImpl extends AbstractFormImpl implements IreceiptFormService {
+    @Resource(name = "receiptFormDao")
     public void setFormDao(FormDao formDao){
         this.formDao = formDao;
     }
 
-    @Value("outstoreform_detail")
+    @Value("receiptform_detail")
     public void setTablename(String tablename){
         this.tablename = tablename;
     }
@@ -32,45 +32,45 @@ public class outStoreFormImpl extends abstractFormImpl implements IoutStoreFormS
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public long addOSF(OutStoreForm form){
+    public long addRF(ReceiptForm form){
         return addForm(form);
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public int deleteOSF(int id){
+    public int deleteRF(int id){
         return deleteForm(id);
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public int deleteOSFBatch(List<Integer> deleteList){
+    public int deleteRFBatch(List<Integer> deleteList){
         return deleteFormBatch(deleteList);
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public int updateOSF(OutStoreForm form){
+    public int updateRF(ReceiptForm form){
         return updateForm(form);
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public int updateOSFBatch(List<OutStoreForm> formList){
+    public int updateRFBatch(List<ReceiptForm> formList){
         return updateFormBatch(formList);
     }
 
-    public Map getBriefOSFBatch(int base, int offset) {//没有详细的具体货物信息，只是摘要
+    public Map getBriefRFBatch(int base, int offset) {//没有详细的具体货物信息，只是摘要
         return getBriefFormBatch(base,offset);
     }
 
-    public Map getOSFDetailById(int id){//获得某一需求计划单的详情货物信息
+    public Map getRFDetailById(int id){//获得某一需求计划单的详情货物信息
         return getFormDetailById(id);
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public int deleteOSFDetailItem(List<Integer> deleteList){
+    public int deleteRFDetailItem(List<Integer> deleteList){
         return deleteFormDetailItem(deleteList);
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public int addOSFDetailItem(int formid,List<DetailItem> detailList){
+    public int addRFDetailItem(int formid,List<DetailItem> detailList){
         return addFormDetailItem(formid,detailList);
     }
 }
