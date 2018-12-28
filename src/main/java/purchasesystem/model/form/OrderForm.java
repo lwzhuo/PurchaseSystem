@@ -1,4 +1,4 @@
-package purchasesystem.model.Form;
+package purchasesystem.model.form;
 
 public class OrderForm extends Form {
     private Long supplierId;

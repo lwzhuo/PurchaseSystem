@@ -2,7 +2,7 @@ package purchasesystem.service.implement.form;
 
 import purchasesystem.dao.form.FormDao;
 import purchasesystem.dao.form.FormDetailDao;
-import purchasesystem.model.Form.OrderForm;
+import purchasesystem.model.form.OrderForm;
 import purchasesystem.model.Goods.DetailItem;
 import purchasesystem.service.IorderFormService;
 import org.springframework.beans.factory.annotation.Value;

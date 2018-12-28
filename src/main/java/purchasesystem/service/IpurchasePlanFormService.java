@@ -1,6 +1,6 @@
 package purchasesystem.service;
 
-import purchasesystem.model.Form.PurchasePlanForm;
+import purchasesystem.model.form.PurchasePlanForm;
 import purchasesystem.model.Goods.DetailItem;
 
 import java.util.List;

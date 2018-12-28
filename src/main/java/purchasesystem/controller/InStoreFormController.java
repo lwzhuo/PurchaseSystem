@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/instoreform")
@@ -31,51 +32,51 @@ public class InStoreFormController {
     }
 
     @PostMapping(value = "deletebatch",consumes = "application/json",produces = "application/json")
-    public @ResponseBody String deleteInStoreFormBatch(@RequestBody HashMap hashMap){
-        List deleteList = (List)hashMap.get("deleteList");
+    public @ResponseBody String deleteInStoreFormBatch(@RequestBody Map map){
+        List deleteList = (List)map.get("deleteList");
         int num = inStoreFormService.deleteISFBatch(deleteList);
         if(num<0) return ReturnJson.returnError();
         else return ReturnJson.returnOK();
     }
 
     @PostMapping(value = "update",consumes = "application/json",produces = "application/json")
-    public @ResponseBody String updateInStoreForm(@RequestBody HashMap<String,InStoreForm> hashMap){
-        InStoreForm form = hashMap.get("Form");
+    public @ResponseBody String updateInStoreForm(@RequestBody Map<String,InStoreForm> map){
+        InStoreForm form = map.get("form");
         int num = inStoreFormService.updateISF(form);
         if(num<0) return ReturnJson.returnError();
         else return ReturnJson.returnOK();
     }
 
     @PostMapping(value = "updatebatch",consumes = "application/json",produces = "application/json")
-    public @ResponseBody String updateInStoreFormBatch(@RequestBody HashMap<String,List<InStoreForm>> hashMap){
-        List<InStoreForm> formlist = hashMap.get("formlist");
+    public @ResponseBody String updateInStoreFormBatch(@RequestBody Map<String,List<InStoreForm>> map){
+        List<InStoreForm> formlist = map.get("formlist");
         int num = inStoreFormService.updateISFBatch(formlist);
         if(num<0) return ReturnJson.returnError();
         else return ReturnJson.returnOK();
     }
     @GetMapping(value = "/getlist",produces = "application/json")
-    public @ResponseBody HashMap getInStoreFormBatch(@RequestParam int base,@RequestParam int offset){
+    public @ResponseBody Map getInStoreFormBatch(@RequestParam int base,@RequestParam int offset){
         HashMap hashMap = (HashMap) inStoreFormService.getBriefISFBatch(base,offset);
         hashMap.put("sum",inStoreFormService.getCount());
         return hashMap;
     }
     @GetMapping(value = "/detail/get",produces = "application/json")
-    public @ResponseBody HashMap getInStoreFormDetail(@RequestParam int id){
-        return (HashMap) inStoreFormService.getISFDetailById(id);
+    public @ResponseBody Map getInStoreFormDetail(@RequestParam int id){
+        return inStoreFormService.getISFDetailById(id);
     }
 
     @PostMapping(value = "/detail/insert",consumes = "application/json",produces = "application/json")
-    public @ResponseBody String insertDetailItem(@RequestBody HashMap hashMap){
-        int formid = (int)hashMap.get("formId");
-        List<DetailItem> detailItems = (List<DetailItem>)hashMap.get("detailList");
+    public @ResponseBody String insertDetailItem(@RequestBody Map map){
+        int formid = (int)map.get("formId");
+        List<DetailItem> detailItems = (List<DetailItem>)map.get("detailList");
         int num = inStoreFormService.addISFDetailItem(formid,detailItems);
         if(num<0) return ReturnJson.returnError();
         else return ReturnJson.returnOK();
     }
     @PostMapping(value = "/detail/delete",consumes = "application/json",produces = "application/json")
-    public @ResponseBody String deleteDetailItem(@RequestBody HashMap hashMap){
-        int formid = (int)hashMap.get("formId");
-        List<Integer> detailItems = (List<Integer>)hashMap.get("deleteList");
+    public @ResponseBody String deleteDetailItem(@RequestBody Map map){
+        int formid = (int)map.get("formId");
+        List<Integer> detailItems = (List<Integer>)map.get("deleteList");
         int num = inStoreFormService.deleteISFDetailItem(detailItems);
         if(num<0) return ReturnJson.returnError();
         else return ReturnJson.returnOK();

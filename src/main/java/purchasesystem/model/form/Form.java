@@ -1,4 +1,4 @@
-package purchasesystem.model.Form;
+package purchasesystem.model.form;
 
 import purchasesystem.model.Goods.DetailItem;
 

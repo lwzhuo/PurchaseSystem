@@ -12,7 +12,7 @@
         <result column="order_id" property="orderId"></result>
         <result column="employee_name" property="auditor"></result>
     </resultMap>
-    <insert id="insertForm" useGeneratedKeys="true" keyProperty="id" parameterType="purchasesystem.model.Form.ReceiptForm">
+    <insert id="insertForm" useGeneratedKeys="true" keyProperty="id" parameterType="purchasesystem.model.form.ReceiptForm">
         INSERT INTO receipt_form (name, status, comment, make_date, order_id, auditor_id,receive_date)
         VALUES(#{title},#{status},#{comment},#{makeDate},#{orderId},#{auditorId},#{receiveDate})
     </insert>
@@ -21,7 +21,7 @@
         DELETE FROM receipt_form WHERE id=#{id}
     </delete>
 
-    <update id="updateForm" parameterType="purchasesystem.model.Form.ReceiptForm">
+    <update id="updateForm" parameterType="purchasesystem.model.form.ReceiptForm">
         UPDATE receipt_form
         <trim prefix="SET" suffixOverrides=",">
             <if test="title!=null">name=#{title},</if>

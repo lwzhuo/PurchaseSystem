@@ -1,6 +1,6 @@
 package purchasesystem.dao.form;
 
-import purchasesystem.model.Form.Form;
+import purchasesystem.model.form.Form;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.HashMap;

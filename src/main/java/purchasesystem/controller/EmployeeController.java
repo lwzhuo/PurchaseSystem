@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
+import java.util.Map;
 
 
 @Controller
@@ -26,12 +27,12 @@ public class EmployeeController {
     }
 
     @RequestMapping(value = "/login")
-    public @ResponseBody HashMap login(@RequestBody HashMap<String,String> hashMap){
-        String employeeId = hashMap.get("employeeId");
-        String password = hashMap.get("password");
+    public @ResponseBody Map login(@RequestBody Map<String,String> map){
+        String employeeId = map.get("employeeId");
+        String password = map.get("password");
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(employeeId,password);
-        HashMap result = new HashMap();
+        Map result = new HashMap();
         try {
             subject.login(token);
             Employee employee = employeeService.selectEmployee(Long.parseLong(employeeId));

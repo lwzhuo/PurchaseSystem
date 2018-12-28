@@ -1,6 +1,6 @@
 package purchasesystem.model.Store;
 
-import purchasesystem.model.Form.Form;
+import purchasesystem.model.form.Form;
 
 public class InStoreForm extends Form {
     private Long auditorId;

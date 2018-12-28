@@ -14,7 +14,7 @@
         <result column="auditor_name" property="auditorName"></result>
         <result column="contract_path" property="contractPath"></result>
     </resultMap>
-    <insert id="insertForm" useGeneratedKeys="true" keyProperty="id" parameterType="purchasesystem.model.Form.OrderForm">
+    <insert id="insertForm" useGeneratedKeys="true" keyProperty="id" parameterType="purchasesystem.model.form.OrderForm">
         INSERT INTO order_form (name, status, comment, make_date, supplier_id,amount,auditor_id,contract_path)
         VALUES(#{title},#{status},#{comment},#{makeDate},#{supplierId},#{amount},#{auditorId},#{contractPath})
     </insert>
@@ -23,7 +23,7 @@
         DELETE FROM order_form WHERE id=#{id}
     </delete>
 
-    <update id="updateForm" parameterType="purchasesystem.model.Form.OrderForm">
+    <update id="updateForm" parameterType="purchasesystem.model.form.OrderForm">
         UPDATE order_form
         <trim prefix="SET" suffixOverrides=",">
             <if test="title!=null">name=#{title},</if>
